@@ -1,0 +1,96 @@
+<!-- 
+  - @author    ThemesBuckets <themebucketbd@gmail.com>
+  - @copyright Copyright (c) 2018
+  - @license   Fulcrumy
+-->
+
+<!-- Header  -->
+<ion-header no-border>
+  <header-one title="Search Bus"></header-one>
+</ion-header>
+
+<!-- Content  -->
+<ion-content padding>
+
+  <!-- Trip Type  -->
+  <ion-segment color="color1" no-padding [(ngModel)]="searchObjects.tripType" style="direction:ltr">
+    <ion-segment-button value="oneWay">
+      One Way
+    </ion-segment-button>
+    <ion-segment-button value="roundTrip">
+      Round Trip
+    </ion-segment-button>
+  </ion-segment>
+
+  <ion-grid no-padding>
+    <ion-list inset>
+
+      <!-- Origin Location  -->
+      <ion-item (tap)="getLocationOrigin()">
+        <ion-label>
+          <ion-icon color="color2" name="pin"></ion-icon>
+        </ion-label>
+        <ion-input type="text" placeholder="Picking Up Location" [(ngModel)]="searchObjects.originLocationName">
+        </ion-input>
+      </ion-item>
+
+      <!-- Destination Location  -->
+      <ion-item (tap)="getLocationDestination()">
+        <ion-label>
+          <ion-icon color="color2" name="pin"></ion-icon>
+        </ion-label>
+        <ion-input type="text" placeholder="Picking Off Location" [(ngModel)]="searchObjects.destinationLocationname">
+        </ion-input>
+      </ion-item>
+
+      <!-- Departure Date  -->
+      <ion-card (tap)="openCalendar()">
+        <ion-card-content>
+          <p class="date">
+            <ion-icon color="color2" name="md-calendar"></ion-icon>&nbsp; <span>{{searchObjects.departureDate | date}}</span>
+          </p>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Seats  -->
+      <ion-card>
+        <ion-row justify-content-center align-items-center>
+          <!-- Increase Seats Number  -->
+          <ion-col col-4 text-center>
+            <button ion-button clear item-end color="color1" (tap)="searchObjects.totalSeats = searchObjects.totalSeats + 1 ">
+            <ion-icon name="add-circle" style="zoom:1.5;"></ion-icon>
+          </button>
+          </ion-col>
+
+          <!-- Total Seats  -->
+          <ion-col col-4 text-center>
+            <span><b>Seats: {{searchObjects.totalSeats}} </b></span>
+          </ion-col>
+
+          <!-- Decrease Seats Number  -->
+          <ion-col col-4 text-center>
+            <button ion-button clear item-end color="color1" [disabled]="searchObjects.totalSeats == 0" (tap)="searchObjects.totalSeats = searchObjects.totalSeats - 1 ">
+            <ion-icon name="remove-circle" style="zoom:1.5;"></ion-icon>
+          </button>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+
+      <!-- Type of Bus  -->
+      <ion-item padding-left>
+        <ion-label>Bus Type</ion-label>
+        <ion-select>
+          <ion-option value="A/C">A/C</ion-option>
+          <ion-option value="Non A/C">Non A/C</ion-option>
+          <ion-option value="Executive">Executive</ion-option>
+        </ion-select>
+      </ion-item>
+
+    </ion-list>
+  </ion-grid>
+</ion-content>
+
+<!-- Footer  -->
+<ion-footer text-center>
+  <button ion-button class="custom-btn" (tap)="findBus()">Find Bus</button>
+</ion-footer>

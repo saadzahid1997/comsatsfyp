@@ -1,0 +1,27 @@
+import { Injectable } from '@angular/core';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { Observable } from 'rxjs/Observable';
+import { map } from 'rxjs/operators/map';
+import { firestore } from 'firebase';
+
+@Injectable()
+export class TripService {
+
+
+    tripCollection: AngularFirestoreCollection<any>;
+    trips: Observable<any>;
+    constructor(public afs: AngularFirestore) {
+        console.log("Trip service instantiated...");
+    }
+    getTripDetails() {
+        return this.afs.collection('trips').snapshotChanges().pipe(map(res => {
+            return res.map(data => { return { id: data.payload.doc.id, data: data.payload.doc.data() } })
+        }))
+    }
+
+    addHotelToTrip(hotelId, tripId) {
+        console.log(`hoteldId: ${hotelId}  |tripId: ${tripId}`);
+
+        return this.afs.collection('trips').doc(tripId).set({ 'hotels': firestore.FieldValue.arrayUnion(hotelId) }, { merge: true });
+    }
+}
