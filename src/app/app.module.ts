@@ -13,7 +13,7 @@ import { IonicImageViewerModule } from 'ionic-img-viewer';
 import { SwingModule } from 'angular2-swing';
 import { SuperTabsModule } from 'ionic2-super-tabs';
 import { CalendarModule } from "ion2-calendar";
-import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormBuilder, FormControl } from '@angular/forms';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AgmCoreModule } from '@agm/core';
 
@@ -87,7 +87,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     //AngularFireDatabase,
     AngularFirestore,
      HotelService,
-     TripService
+     TripService,
+     ReactiveFormsModule,
+     FormsModule
 
   ]
 })

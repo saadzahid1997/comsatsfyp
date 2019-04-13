@@ -74,96 +74,80 @@ export default class AddHotelsPage {
 
   }
 
-  showRadioRooms()
+
+  showHotelAmenities()
   {
-    let alertRoomCategory = this.alert.create();
-    alertRoomCategory.setTitle("Rooms");
-    alertRoomCategory.addInput({
+    let alertHotelAmenities = this.alert.create();
+    alertHotelAmenities.setTitle('Amenities');
+    alertHotelAmenities.addInput({
       type : 'checkbox',
-      label : 'Luxury',
-      value : 'Luxury'
+      label: 'Free Wifi',
+      value: 'Free Wifi'
       
     });
-    
-    alertRoomCategory.addInput({
+
+    alertHotelAmenities.addInput({
       type : 'checkbox',
-      label : 'Normal',
-      value : 'Normal'
+      label: 'Free Parking',
+      value: 'Free Parking'
+      
     });
-    
-    alertRoomCategory.addButton('Cancel');
-    alertRoomCategory.addButton({
+
+    alertHotelAmenities.addInput({
+      type : 'checkbox',
+      label: 'Pool',
+      value: 'Pool'
+      
+    });
+
+    alertHotelAmenities.addInput({
+      type : 'checkbox',
+      label: 'Air Condtioning',
+      value: 'Air Condtioning'
+      
+    });
+
+    alertHotelAmenities.addInput({
+      type : 'checkbox',
+      label: 'Room Service',
+      value: 'Room Service'
+      
+    });
+
+    alertHotelAmenities.addInput({
+      type : 'checkbox',
+      label: 'Meeting rooms' ,
+      value: 'Meeting rooms'
+      
+    });
+
+    alertHotelAmenities.addInput({
+      type : 'checkbox',
+      label: 'Kitchenette' ,
+      value: 'Kitchenette'
+      
+    });
+
+    alertHotelAmenities.addInput({
+      type : 'checkbox',
+      label: 'Restaurant' ,
+      value: 'Restaurant'
+      
+    });
+
+    alertHotelAmenities.addButton('Cancel');
+    alertHotelAmenities.addButton({
       text: 'OK',
-      handler: data =>{
+      handler: data => {
 
-        this.hotel.hotelPrice = data;
-
+        //this.hotel.hotelCategory = data;
       }
     });
-    alertRoomCategory.present();
+    alertHotelAmenities.present();
   }
 
-  showRoomPrice()
-  {
-    let alertRoomPrice = this.alert.create();
-    alertRoomPrice.setTitle('Price');
-    alertRoomPrice.addInput({
-      type : 'text',
-      placeholder : 'Enter the price',
-      
-    });
-    alertRoomPrice.present();
-  }
 
-  showRoomSpace()
-  {
-    let alertRoomCategory = this.alert.create();
-    alertRoomCategory.setTitle('Room Category');
-    alertRoomCategory.addInput({
-      type : 'checkbox',
-      label : '1 Bed',
-      value : '1 Bed'
-      
-    });
-
-    alertRoomCategory.addInput({
-      type : 'checkbox',
-      label : '2 Bed',
-      value : '2 Bed'
-      
-    });
-
-    alertRoomCategory.addInput({
-      type : 'checkbox',
-      label : '3 Bed',
-      value : '3 Bed'
-      
-    });
-
-    alertRoomCategory.addInput({
-      type : 'checkbox',
-      label : '4 Bed',
-      value : '4 Bed'
-      
-    });
-
-    alertRoomCategory.addInput({
-      type : 'checkbox',
-      label : '5 Bed',
-      value : '5 Bed'
-      
-    });
-  }
-
-   showRoomNumbers()
-   {
-      let alertRoomNumber = this.alert.create();
-      alertRoomNumber.setTitle('No. of Rooms');
-      alertRoomNumber.addInput({
-        type : 'Number',
-        placeholder : 'Enter the No. of Rooms'
-      });
-   }
+   
    roomsModal()
    {
       

@@ -16,30 +16,227 @@
 <ion-content padding>
 
 <div>
-  <ion-item>
-    <ion-label>Luxury</ion-label>
-    <ion-checkbox  color = "primary"></ion-checkbox>
-  </ion-item>  
-  
-  <ion-item>
-    <ion-label floating>Number of Room(s)</ion-label>
-    <ion-input type = "number" ></ion-input>
-  </ion-item>
+      <ion-item>
+        <ion-label>Luxury</ion-label>
+        <ion-checkbox  [(ngModel)] = "isActive[0]"   ></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label floating >Number of Room(s)</ion-label>
+        <ion-input type = "number" ></ion-input>
+      </ion-item>  
 
-  <ion-item>
-    <ion-row>
-      <ion-col col-6>
-          
-              <ion-label>1 Bed</ion-label>
-              <ion-checkbox  color = "primary"></ion-checkbox>
-          
-      </ion-col>
-      <ion-col col-6>
-          <ion-label floating>Price /Night</ion-label>
-          <ion-input type = "text" >/Night</ion-input>
-        </ion-col>
-    </ion-row>
-  </ion-item>
-</div>
   
+    <ion-row>
+      
+      <ion-col col-4> 
+          <ion-item>
+              <ion-label  >1 Bed</ion-label>
+              <ion-checkbox  [(ngModel)] = "isActive[1]" color = "primary"></ion-checkbox>
+          </ion-item>  
+      </ion-col>
+            
+      <ion-col col-8>
+            <ion-item>
+              <ion-label>Price/Night</ion-label>
+              <ion-input type = "text" >/Night</ion-input>
+            </ion-item>    
+      </ion-col>
+      
+    </ion-row>
+  
+    <ion-row>
+      
+        <ion-col col-4>
+            <ion-item>
+                <ion-label  >2 Bed</ion-label>
+                <ion-checkbox [(ngModel)] = "isActive[2]" color = "primary"></ion-checkbox>
+            </ion-item>  
+        </ion-col>
+              
+        <ion-col col-8>
+              <ion-item >
+                <ion-label >Price/Night</ion-label>
+                <ion-input type = "text" >/Night</ion-input>
+              </ion-item>    
+        </ion-col>
+        
+      </ion-row>
+  
+      <ion-row>
+      
+          <ion-col col-4>
+              <ion-item>
+                  <ion-label  >3 Bed</ion-label>
+                  <ion-checkbox [(ngModel)] = "isActive[3]" color = "primary"></ion-checkbox>
+              </ion-item>  
+          </ion-col>
+                
+          <ion-col col-8>
+                <ion-item>
+                  <ion-label>Price/Night</ion-label>
+                  <ion-input type = "text" >/Night</ion-input>
+                </ion-item>    
+          </ion-col>
+          
+        </ion-row>
+  
+        <ion-row>
+      
+            <ion-col col-4>
+                <ion-item>
+                    <ion-label>4 Bed</ion-label>
+                    <ion-checkbox [(ngModel)] = "isActive[4]" color = "primary"></ion-checkbox>
+                </ion-item>  
+            </ion-col>
+                  
+            <ion-col col-8>
+                  <ion-item>
+                    <ion-label>Price/Night</ion-label>
+                    <ion-input type = "text" >/Night</ion-input>
+                  </ion-item>    
+            </ion-col>
+            
+          </ion-row>
+  
+          <ion-row>
+      
+              <ion-col col-4>
+                  <ion-item>
+                      <ion-label>5 Bed</ion-label>
+                      <ion-checkbox [(ngModel)] = "isActive[5]" color = "primary"></ion-checkbox>
+                  </ion-item>  
+              </ion-col>
+                    
+              <ion-col col-8>
+                    <ion-item>
+                      <ion-label>Price/Night</ion-label>
+                      <ion-input type = "text" >/Night</ion-input>
+                    </ion-item>    
+              </ion-col>
+              
+            </ion-row>
+
+            <!--<ion-row>
+              <ion-col col-4>
+                <button ion-button> Cancel </button>
+              </ion-col>
+              <ion-col col-4>
+                <button ion-button> Done </button>
+              </ion-col>
+            </ion-row>-->
+</div>    
+<div style="margin-top: 10%;">
+    <ion-item>
+        <ion-label>Normal</ion-label>
+        <ion-checkbox [(ngModel)] = "isActive[6]" color = "primary"></ion-checkbox>
+      </ion-item>  
+      <ion-item>
+        <ion-label floating>Number of Room(s)</ion-label>
+        <ion-input type = "number" ></ion-input>
+      </ion-item>  
+
+  
+    <ion-row>
+      
+      <ion-col col-4> 
+          <ion-item>
+              <ion-label  >1 Bed</ion-label>
+              <ion-checkbox [(ngModel)] = "isActive[7]" color = "primary"></ion-checkbox>
+          </ion-item>  
+      </ion-col>
+            
+      <ion-col col-8>
+            <ion-item>
+              <ion-label>Price/Night</ion-label>
+              <ion-input type = "text" >/Night</ion-input>
+            </ion-item>    
+      </ion-col>
+      
+    </ion-row>
+  
+    <ion-row>
+      
+        <ion-col col-4>
+            <ion-item>
+                <ion-label  >2 Bed</ion-label>
+                <ion-checkbox [(ngModel)] = "isActive[8]" color = "primary"></ion-checkbox>
+            </ion-item>  
+        </ion-col>
+              
+        <ion-col col-8>
+              <ion-item >
+                <ion-label >Price/Night</ion-label>
+                <ion-input type = "text" >/Night</ion-input>
+              </ion-item>    
+        </ion-col>
+        
+      </ion-row>
+  
+      <ion-row>
+      
+          <ion-col col-4>
+              <ion-item>
+                  <ion-label  >3 Bed</ion-label>
+                  <ion-checkbox [(ngModel)] = "isActive[9]" color = "primary"></ion-checkbox>
+              </ion-item>  
+          </ion-col>
+                
+          <ion-col col-8>
+                <ion-item>
+                  <ion-label>Price/Night</ion-label>
+                  <ion-input type = "text" >/Night</ion-input>
+                </ion-item>    
+          </ion-col>
+          
+        </ion-row>
+  
+        <ion-row>
+      
+            <ion-col col-4>
+                <ion-item>
+                    <ion-label>4 Bed</ion-label>
+                    <ion-checkbox [(ngModel)] = "isActive[10]" color = "primary"></ion-checkbox>
+                </ion-item>  
+            </ion-col>
+                  
+            <ion-col col-8>
+                  <ion-item>
+                    <ion-label>Price/Night</ion-label>
+                    <ion-input type = "text" >/Night</ion-input>
+                  </ion-item>    
+            </ion-col>
+            
+          </ion-row>
+  
+          <ion-row>
+      
+              <ion-col col-4>
+                  <ion-item>
+                      <ion-label>5 Bed</ion-label>
+                      <ion-checkbox [(ngModel)] = "isActive[11]" color = "primary"></ion-checkbox>
+                  </ion-item>  
+              </ion-col>
+                    
+              <ion-col col-8>
+                    <ion-item>
+                      <ion-label>Price/Night</ion-label>
+                      <ion-input type = "text" >/Night</ion-input>
+                    </ion-item>    
+              </ion-col>
+              
+            </ion-row>
+
+     
+</div>
+<div style="margin-top: 10%; text-align: right;">
+  <ion-row>
+              <ion-col col-4>
+                <button ion-button> Cancel </button>
+              </ion-col>
+              <ion-col col-4>
+                <button ion-button (tap) = "addRooms()"> Done </button>
+              </ion-col>
+  </ion-row>
+
+</div>
 </ion-content>

@@ -27,9 +27,9 @@
   </ion-col>
   </ion-row>
   <ion-item>
-      <ion-label floating>Hotel Overview</ion-label>  
-      <ion-input type = "text" [(ngModel)]="hotel.hotelOverview"></ion-input>
-  </ion-item>
+        <ion-label floating>Amenities</ion-label>  
+        <ion-input type = "text" (tap) = "showHotelAmenities()"></ion-input>
+  </ion-item>    
   <ion-item>
       <ion-label floating>Hotel Mail</ion-label>  
       <ion-input type = "text" [(ngModel)]="hotel.hotelMail"></ion-input>
@@ -42,6 +42,11 @@
         <ion-label floating >Hotel Location</ion-label>
         <ion-input id = "txtLocation" (tap) = "ionViewDidLoad()" type = "text"  autocomplete="on"  [(ngModel)] ="hotel.hotelLocation" ></ion-input>
    </ion-item>
+   <ion-item>
+        <ion-label floating>Hotel Description</ion-label>  
+        <ion-input type = "text" [(ngModel)]="hotel.hotelOverview"></ion-input>
+    </ion-item>
+    
    <ion-row>
        <ion-col col-4>
             <ion-item>
