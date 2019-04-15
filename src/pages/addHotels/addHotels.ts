@@ -140,7 +140,7 @@ export default class AddHotelsPage {
       text: 'OK',
       handler: data => {
 
-        //this.hotel.hotelCategory = data;
+        this.hotel.hotelAmenities = data;
       }
     });
     alertHotelAmenities.present();
@@ -181,11 +181,12 @@ export default class AddHotelsPage {
     this.hotelRef$.add({
       hotelName: this.hotel.hotelName,
       hotelCategory: this.hotel.hotelCategory,
-      hotelPrice: this.hotel.hotelPrice,
+      
       hotelOverview: this.hotel.hotelOverview,
       hotelMail: this.hotel.hotelMail,
       hotelContactNo: this.hotel.hotelContactNo,
-      hotelLocation: this.hotel.hotelLocation
+      hotelLocation: this.hotel.hotelLocation,
+      hotelAmenities:this.hotel.hotelAmenities
     });
   }
 

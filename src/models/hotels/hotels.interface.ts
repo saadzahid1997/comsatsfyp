@@ -9,4 +9,5 @@ export interface Hotel
   hotelMail:EmailValidator;
   hotelContactNo:number;
   hotelLocation:any;
+  hotelAmenities:string;
 }

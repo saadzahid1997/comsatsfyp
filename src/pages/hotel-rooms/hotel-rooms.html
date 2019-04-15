@@ -22,7 +22,7 @@
       </ion-item>
       <ion-item>
         <ion-label floating >Number of Room(s)</ion-label>
-        <ion-input type = "number" ></ion-input>
+        <ion-input type = "number" [(ngModel)] = "rooms.numOfLuxRooms" ></ion-input>
       </ion-item>  
 
   
@@ -31,14 +31,14 @@
       <ion-col col-4> 
           <ion-item>
               <ion-label  >1 Bed</ion-label>
-              <ion-checkbox  [(ngModel)] = "isActive[1]" color = "primary"></ion-checkbox>
+              <ion-checkbox  [(ngModel)] = "isActive[1]" enabled = "enabled" color = "primary"></ion-checkbox>
           </ion-item>  
       </ion-col>
             
       <ion-col col-8>
             <ion-item>
               <ion-label>Price/Night</ion-label>
-              <ion-input type = "text" >/Night</ion-input>
+              <ion-input type = "text" [(ngModel)] = "rooms.one_bed_Lux_price">/Night</ion-input>
             </ion-item>    
       </ion-col>
       
@@ -56,7 +56,7 @@
         <ion-col col-8>
               <ion-item >
                 <ion-label >Price/Night</ion-label>
-                <ion-input type = "text" >/Night</ion-input>
+                <ion-input type = "text" [(ngModel)] = "rooms.two_bed_Lux_price">/Night</ion-input>
               </ion-item>    
         </ion-col>
         
@@ -74,7 +74,7 @@
           <ion-col col-8>
                 <ion-item>
                   <ion-label>Price/Night</ion-label>
-                  <ion-input type = "text" >/Night</ion-input>
+                  <ion-input type = "text" [(ngModel)] = "rooms.three_bed_Lux_price">/Night</ion-input>
                 </ion-item>    
           </ion-col>
           
@@ -92,7 +92,7 @@
             <ion-col col-8>
                   <ion-item>
                     <ion-label>Price/Night</ion-label>
-                    <ion-input type = "text" >/Night</ion-input>
+                    <ion-input type = "text" [(ngModel)] = "rooms.four_bed_Lux_price">/Night</ion-input>
                   </ion-item>    
             </ion-col>
             
@@ -110,7 +110,7 @@
               <ion-col col-8>
                     <ion-item>
                       <ion-label>Price/Night</ion-label>
-                      <ion-input type = "text" >/Night</ion-input>
+                      <ion-input type = "text" [(ngModel)] = "rooms.five_bed_Lux_price">/Night</ion-input>
                     </ion-item>    
               </ion-col>
               
@@ -132,7 +132,7 @@
       </ion-item>  
       <ion-item>
         <ion-label floating>Number of Room(s)</ion-label>
-        <ion-input type = "number" ></ion-input>
+        <ion-input type = "number" [(ngModel)] = "rooms.numOfNomRooms"></ion-input>
       </ion-item>  
 
   
@@ -148,7 +148,7 @@
       <ion-col col-8>
             <ion-item>
               <ion-label>Price/Night</ion-label>
-              <ion-input type = "text" >/Night</ion-input>
+              <ion-input type = "text" [(ngModel)] = "rooms.one_bed_Nom_price">/Night</ion-input>
             </ion-item>    
       </ion-col>
       
@@ -166,7 +166,7 @@
         <ion-col col-8>
               <ion-item >
                 <ion-label >Price/Night</ion-label>
-                <ion-input type = "text" >/Night</ion-input>
+                <ion-input type = "text" [(ngModel)] = "rooms.two_bed_Nom_price">/Night</ion-input>
               </ion-item>    
         </ion-col>
         
@@ -184,7 +184,7 @@
           <ion-col col-8>
                 <ion-item>
                   <ion-label>Price/Night</ion-label>
-                  <ion-input type = "text" >/Night</ion-input>
+                  <ion-input type = "text" [(ngModel)] = "rooms.three_bed_Nom_price">/Night</ion-input>
                 </ion-item>    
           </ion-col>
           
@@ -202,7 +202,7 @@
             <ion-col col-8>
                   <ion-item>
                     <ion-label>Price/Night</ion-label>
-                    <ion-input type = "text" >/Night</ion-input>
+                    <ion-input type = "text" [(ngModel)] = "rooms.four_bed_Nom_price">/Night</ion-input>
                   </ion-item>    
             </ion-col>
             
@@ -220,7 +220,7 @@
               <ion-col col-8>
                     <ion-item>
                       <ion-label>Price/Night</ion-label>
-                      <ion-input type = "text" >/Night</ion-input>
+                      <ion-input type = "text" [(ngModel)] = "rooms.five_bed_Nom_price">/Night</ion-input>
                     </ion-item>    
               </ion-col>
               

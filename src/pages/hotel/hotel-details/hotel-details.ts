@@ -12,16 +12,21 @@ import { IonicPage, NavController, NavParams, ViewController, ModalController } 
 import { Hotel } from '../../../models/hotels/hotels.interface';
 //import { HotelService } from '../../../app/services/hotels.service';
 import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
+import { HotelService } from '../../../app/services/hotels.service';
+import { storage } from 'firebase';
+import { Observable } from 'rxjs';
 @IonicPage()
 @Component({
   selector: 'page-hotel-details',
   templateUrl: 'hotel-details.html',
 })
 export class HotelDetailsPage implements OnInit {
+  hotels: Observable<any>;
   hotelsList: any = [];
   hotel = {} as Hotel;
+  hotelId : string;
   //locationRef = SearchHotelsPage.searchPlace;
-  hotelRef$: AngularFirestoreCollection<Hotel[]>
+  hotelRef$: AngularFirestoreCollection<any>
 
   // Check In Date
   checkInDate: any;
@@ -38,7 +43,7 @@ export class HotelDetailsPage implements OnInit {
     public viewCtrl: ViewController,
     public modalCtrl: ModalController,
     private db: AngularFirestore,
-   //private hotelSer: HotelService
+    public hotelSer: HotelService
   ) {
     // Get Hotel Details Information
     this.hotelRef$ = this.db.collection('hotel');
@@ -51,11 +56,14 @@ export class HotelDetailsPage implements OnInit {
   }
 
   ngOnInit() {
-    // this.hotelSer.getHotels().subscribe(items => {
-    //   this.hotelsList = items;
-    // });
+    // //  this.hotelSer.getHotels().subscribe(hotel => {
+    // //       this.hotelsList = hotel;
+    // //  });
+    // console.log(this.hotelSer.showHotelDetails(this.navParams.data.hotelId).valueChanges());
+    // console.log(this.hotelsList);       
+     
   }
-
+  
   /**
    * Open Location Map
    */

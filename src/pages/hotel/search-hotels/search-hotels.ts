@@ -38,7 +38,7 @@ public static  searchPlace:string;
     ) {
       
     this.searcHotelForm = this._formBuilder.group({
-      txtSearch: ['', Validators.required]
+      txtSearch: ['', Validators.required]  
 
     })
     

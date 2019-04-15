@@ -17,8 +17,8 @@
     <ion-row >
       <!--<ion-col col-6>
         <ion-card class="animated fadeInLeft" (tap)="trip()"> <span class="color1 bg-dark">Create a Trip</span></ion-card>
-      </ion-col>-->
-      <ion-col col-6 *ngFor = "let trip of tripList">
+      </ion-col>--> 
+      <ion-col col-6 *ngFor = "let trip of tripList" (tap) = "tripDetails()">
         <ion-card class="animated fadeInLeft text-primary" >{{trip.data.tripName}}</ion-card>
       </ion-col>
       

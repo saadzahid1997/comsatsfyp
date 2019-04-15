@@ -18,6 +18,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 export class HotelRoomsPage {
   rooms = {} as Rooms;
   isActive: any = [];
+  enabled : boolean = false;
   roomsRef : AngularFirestoreCollection<any>;
   constructor(public navCtrl: NavController, public navParams: NavParams, private db:AngularFirestore) {
     this.roomsRef = this.db.collection('room-details');
@@ -45,15 +46,19 @@ export class HotelRoomsPage {
     else
       {
         this.rooms.luxury = false;
+        this.enabled = false;
       }
     if (this.isActive[1] == true)
       { 
         this.rooms.one_bed_Lux = true;
+        
       }
     else
       {
         this.rooms.one_bed_Lux = false;
+        
       }
+
     if (this.isActive[2] == true)
       { 
         this.rooms.two_bed_Lux = true;
@@ -149,7 +154,18 @@ export class HotelRoomsPage {
             three_bed_Lux : this.rooms.three_bed_Lux,
             four_bed_Lux : this.rooms.four_bed_Lux,
             five_bed_Lux : this.rooms.five_bed_Lux,
-            
+            one_bed_Nom_price : this.rooms.one_bed_Nom_price,
+            two_bed_Nom_price : this.rooms.two_bed_Nom_price,
+            three_bed_Nom_price : this.rooms.three_bed_Nom_price,
+            four_bed_Nom_price : this.rooms.four_bed_Nom_price,
+            five_bed_Nom_price : this.rooms.five_bed_Nom_price,
+            one_bed_Lux_price : this.rooms.one_bed_Lux_price,
+            two_bed_Lux_price : this.rooms.two_bed_Lux_price,
+            three_bed_Lux_price : this.rooms.three_bed_Lux_price,
+            four_bed_Lux_price : this.rooms.four_bed_Lux_price,
+            five_bed_Lux_price : this.rooms.five_bed_Lux_price,
+            numOfLuxRooms: this.rooms.numOfLuxRooms,
+            numOfNomRooms: this.rooms.numOfNomRooms
           });
 
           console.log("done");

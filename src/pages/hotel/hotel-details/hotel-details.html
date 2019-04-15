@@ -10,7 +10,7 @@
 </ion-header>
 
 <!-- Content  -->
-<ion-content fullscreen elestic-header>
+<ion-content fullscreen elestic-header *ngFor = "let hotel of hotelsList" >
 
   <!-- Hotel Location Map Icon  -->
   <ion-fab top right edge>
@@ -20,23 +20,25 @@
   <!-- Image Slider of Hotel  -->
   <ion-slides slidesPerView="0" pager loop="false" effect="slide" autoplay="5000" class="image-slider" style="direction:ltr">
     <ion-slide >
-    
-      <div class="slider-contents" *ngFor = "let hotel of hotelsList">
       
-        <!-- Name of Hotel  -->
-        <p class="name">
+      <div class="slider-contents"  >
         
-          {{ hotel.hotelName }}
-        </p>
-
-        <!-- Reviews and Type of Hotel -->
-        <p class="reviews">{{hotel.hotelOverview}} Reviews | {{hotel.hotelCategory}} hotel</p>
+         
+        <!-- Name of Hotel  -->
+        
+        <p class="name"> {{hotel.data.hotelName}}  </p>
+        
+         <!--Reviews and Type of Hotel -->
+        <p class="reviews">{{hotel.data.hotelOverview}} Reviews | {{hotel.data.hotelCategory}} hotel</p>
 
         <!-- Hotel Ratings  
         <rating [(ngModel)]="hotelDetails.star" readOnly="false" max="{{hotelDetails.star}}" emptyStarIconName="ios-star-outline"
           halfStarIconName="star-half" starIconName="ios-star" nullable="true">
         </rating>-->
+      
+      
       </div>
+      
     </ion-slide>
   </ion-slides>
 

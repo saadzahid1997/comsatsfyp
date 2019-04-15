@@ -13,7 +13,7 @@ export class TravelCategoryComponent {
     
     { icon: 'fa fa-bed', name:'Places',  component:'SearchPlacesPage'},
     { icon: 'fa fa-bed', name: 'HOTELS', component: 'SearchHotelsPage' },
-    { icon: 'fa fa-bolt', name:'RESTURANTS', component:'SearchResturentsPage'},
+    { icon: 'fa fa-bolt', name:'RESTURANTS', component:'ResturantsPage'},
     { icon: 'fa fa-bus', name: 'TRANSPORT', component: 'SearchBusPage' },
     { icon: 'fa fa-cog', name: 'ACTIVITIES', component: 'SearchActivitiesPage' },
     { icon:  'fa fa-road', name: 'ROUTES', component: 'SearchRoutesPage'}

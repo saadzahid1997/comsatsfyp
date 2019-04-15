@@ -92,8 +92,9 @@ export class RetrieveHotelPage implements OnInit {
 
   // }
 
-  hotelDetail() {
-    this.navCtrl.setRoot('HotelDetailsPage');
+  hotelDetail(hotelId) {
+  
+    this.navCtrl.setRoot('HotelDetailsPage', {hotelId});
   }
 
 }
