@@ -17,6 +17,7 @@ import { TripService } from '../../app/services/trips.service';
 export class TripPopPage {
   tripList: any = [];
   hotelId;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public tripSer: TripService) {
   }
 
@@ -35,6 +36,8 @@ export class TripPopPage {
     })
 
   }
+
+  
 
 }
 

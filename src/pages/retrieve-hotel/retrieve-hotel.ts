@@ -43,7 +43,7 @@ export class RetrieveHotelPage implements OnInit {
     this.hotelSer.getHotels().subscribe(items => {
       console.log(items);
       this.hotelsList = items;
-    });
+    }); 
     // //     const center = this.geo.point(40.5,-80.0);
     // //     const radius = 0.5;
     // //     const field = 'hotelLocation'
@@ -70,7 +70,7 @@ export class RetrieveHotelPage implements OnInit {
     popover.present({
       ev: myEvent
     });
-  }
+  } 
 
   // retrieveData() {
   //   console.log("operating");

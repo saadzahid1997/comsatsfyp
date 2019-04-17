@@ -30,4 +30,8 @@ export class ResturantsPage {
   {
     this.navCtrl.setRoot('AadResturantsPage');
   }
+  searchResturants()
+  {
+    this.navCtrl.setRoot('FindResturantsPage')
+  }
 }

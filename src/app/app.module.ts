@@ -24,6 +24,7 @@ import { FileTransferObject } from '@ionic-native/file-transfer';
 
 import { AngularFireAuth } from '@angular/fire/auth';
 import { TripService } from './services/trips.service';
+import { ResturantService } from './services/resturant.service';
 const firebaseAuth = {
   apiKey: "AIzaSyB51DoNQ_es7SyUkIajEjlXFaklFqVR2Ts",
   authDomain: "travel-gb.firebaseapp.com",
@@ -88,6 +89,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AngularFirestore,
      HotelService,
      TripService,
+     ResturantService,
      ReactiveFormsModule,
      FormsModule
 

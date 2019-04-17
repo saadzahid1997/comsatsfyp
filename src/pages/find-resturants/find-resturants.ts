@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component,OnInit } from '@angular/core';
+import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
+import { ResturantService } from '../../app/services/resturant.service';
+
+
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 
 /**
  * Generated class for the FindResturantsPage page.
@@ -13,13 +17,33 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   selector: 'page-find-resturants',
   templateUrl: 'find-resturants.html',
 })
-export class FindResturantsPage {
+export class FindResturantsPage implements OnInit {
+  resturantList: any = [];
+  
+  constructor(public navCtrl: NavController, 
+               public navParams: NavParams,
+               public resturantSer : ResturantService,
+               public db : AngularFirestore,
+               public popoverCtrl: PopoverController)
+   {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+    }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FindResturantsPage');
   }
-
+  ngOnInit()
+  {
+      this.resturantSer.getResturant().subscribe(resturant=>{
+      console.log(resturant);
+      this.resturantList = resturant;
+    });
+  }
+  openTrips(myEvent, resturantId) {
+    console.log(resturantId);
+    let popover = this.popoverCtrl.create('TripPopResturantsPage', { resturantId });
+    popover.present({
+      ev: myEvent
+    });
+  }
 }
