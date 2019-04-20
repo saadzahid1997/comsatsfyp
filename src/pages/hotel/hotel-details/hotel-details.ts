@@ -7,7 +7,7 @@
  * File path - '../../src/pages/hotel/hotel-details/hotel-details'
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, ModalController } from 'ionic-angular';
 import { Hotel } from '../../../models/hotels/hotels.interface';
 //import { HotelService } from '../../../app/services/hotels.service';
@@ -15,6 +15,7 @@ import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/fire
 import { HotelService } from '../../../app/services/hotels.service';
 import { storage } from 'firebase';
 import { Observable } from 'rxjs';
+
 @IonicPage()
 @Component({
   selector: 'page-hotel-details',
@@ -23,8 +24,9 @@ import { Observable } from 'rxjs';
 export class HotelDetailsPage implements OnInit {
   hotels: Observable<any>;
   hotelsList: any = [];
+  hotelDetail;
   hotel = {} as Hotel;
-  hotelId : string;
+  hotelId: string;
   //locationRef = SearchHotelsPage.searchPlace;
   hotelRef$: AngularFirestoreCollection<any>
 
@@ -56,20 +58,23 @@ export class HotelDetailsPage implements OnInit {
   }
 
   ngOnInit() {
-    // //  this.hotelSer.getHotels().subscribe(hotel => {
-    // //       this.hotelsList = hotel;
-    // //  });
-    // console.log(this.hotelSer.showHotelDetails(this.navParams.data.hotelId).valueChanges());
-    // console.log(this.hotelsList);       
-     
-  }
+      
   
+    
+    const hotelId = this.navParams.data.hotelId;
+    this.hotelSer.showHotelDetails(hotelId).subscribe(hotel => {
+      this.hotelsList[0] = hotel.data;
+      console.log(this.hotelsList );
+    })
+
+  }
   /**
    * Open Location Map
    */
-  openLocationMap() {
-    this.modalCtrl.create('LocationMapPage', { address: this.hotel.hotelLocation }).present();
-  }
+  openLocationMap()
+    {
+      this.modalCtrl.create('LocationMapPage', { address: this.hotel.hotelLocationLat  }).present();
+    }
 
   goToOrderPage() {
     this.viewCtrl.dismiss();

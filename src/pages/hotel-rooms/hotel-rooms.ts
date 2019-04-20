@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController,NavParams } from 'ionic-angular';
+import { IonicPage, NavController,NavParams, ModalController } from 'ionic-angular';
 import { Rooms } from '../../models/rooms/rooms.interface';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 
@@ -169,6 +169,7 @@ export class HotelRoomsPage {
           });
 
           console.log("done");
+          this.navCtrl.last;
         }
   //    
 }

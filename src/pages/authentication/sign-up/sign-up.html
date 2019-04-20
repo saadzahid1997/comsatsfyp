@@ -51,7 +51,7 @@
             <p>Please enter a valid email address.</p>
           </div>
 
-    
+          
           <ion-item>
             <ion-label>
               <ion-icon name="md-eye" color="color2"></ion-icon>
@@ -70,7 +70,7 @@
             <ion-label >
               <ion-icon   color = "color2"><i class="fas fa-map-marker-alt"></i></ion-icon>                
             </ion-label>
-            <ion-input type = "text" id = "userAddress" placeholder = "Your Address" (tap) = "userLocation()"></ion-input>
+            <ion-input type = "text" id = "userAddress" placeholder = "Your Address" (tap) = "userLocation()" autocomplete="on"></ion-input>
           </ion-item>        
         </ion-list>
         <button ion-button round block type="button" class="custom-btn" (tap)="doRegistration()"(click)="addUser(user)">

@@ -196,11 +196,14 @@
 <!-- Footer  -->
 <ion-footer text-center>
   <ion-row>
-    <ion-col col-6 text-left>
-      <button ion-button class="custom-btn" (tap)="searchHotels()">Find Hotels</button>
+    <ion-col col-3 text-left>
+      <button ion-button  (tap)="searchHotels()">Find Hotels</button>
     </ion-col>
-    <ion-col col-6 align-text-right>
-      <button ion-button  class="custom-btn" (tap)="addHotels()">Add Hotels</button>
+    <ion-col col-3>
+      <button ion-button  (tap)="nearByHotels()">Nearby Hotels</button>
+    </ion-col>
+    <ion-col col-3 align-text-right>
+      <button ion-button  (tap)="addHotels()">Add Hotels</button>
     </ion-col>
   </ion-row>
 

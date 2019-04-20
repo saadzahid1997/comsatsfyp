@@ -20,7 +20,14 @@ export class TripService {
             return res.map(data => { return { id: data.payload.doc.id, data: data.payload.doc.data() } })
         }))
     }
-
+    tripDetails(tripId)
+    {
+        return this.afs.collection('trips').doc(tripId).snapshotChanges().pipe(map(data => {
+            return {
+                id: data.payload.id, data: data.payload.data()
+            }
+        }))        
+    }
     addHotelToTrip(hotelId, tripId) 
     {
         console.log(`hoteldId: ${hotelId}  |tripId: ${tripId}`);

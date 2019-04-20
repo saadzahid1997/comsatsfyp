@@ -9,27 +9,26 @@ export class HotelService {
 
     hotelCollection: AngularFirestoreCollection<any>;
     hotels: Observable<any>;
-    hotelDetailId : any;
+    hotelDetailId: any;
     constructor(public afs: AngularFirestore) {
         console.log("Hotel service instantiated...");
 
     }
-    
+
     getHotels() {
         return this.afs.collection('hotel').snapshotChanges().pipe(map(res => {
             return res.map(data => { return { id: data.payload.doc.id, data: data.payload.doc.data() } })
         }))
-    }
-
-    showHotelDetails(hotelDetailId)
-    {
-            return this.afs.collection('hotel').doc(hotelDetailId);
-        //    return this.afs.collection('hotel').doc(hotelDetailId).snapshotChanges().pipe(map(data => { return {
-        //          data: data.payload.data() }
-        // }))   
-            
-            //eturn this.afs.doc('')
-    }
-
     
+    }
+
+    showHotelDetails(hotelDetailId) {
+        return this.afs.collection('hotel').doc(hotelDetailId).snapshotChanges().pipe(map(data => {
+            return {
+                id: data.payload.id, data: data.payload.data()
+            }
+        }))
+    }
+
+
 }

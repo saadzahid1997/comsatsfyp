@@ -1,5 +1,5 @@
 import { Component,OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, PopoverController,Platform } from 'ionic-angular';
 import { ResturantService } from '../../app/services/resturant.service';
 
 
@@ -19,12 +19,17 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 })
 export class FindResturantsPage implements OnInit {
   resturantList: any = [];
-  
+  map: any;
+  geocoder: any;
+  address: any;
+  google:any;
+
   constructor(public navCtrl: NavController, 
                public navParams: NavParams,
                public resturantSer : ResturantService,
                public db : AngularFirestore,
-               public popoverCtrl: PopoverController)
+               public popoverCtrl: PopoverController,
+               public platform: Platform)
    {
 
     }
@@ -34,10 +39,10 @@ export class FindResturantsPage implements OnInit {
   }
   ngOnInit()
   {
-      this.resturantSer.getResturant().subscribe(resturant=>{
-      console.log(resturant);
-      this.resturantList = resturant;
-    });
+    //   this.resturantSer.getResturant().subscribe(resturant=>{
+    //   console.log(resturant);
+    //   this.resturantList = resturant;
+    // });
   }
   openTrips(myEvent, resturantId) {
     console.log(resturantId);

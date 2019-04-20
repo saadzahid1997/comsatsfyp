@@ -25,6 +25,9 @@ import { FileTransferObject } from '@ionic-native/file-transfer';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { TripService } from './services/trips.service';
 import { ResturantService } from './services/resturant.service';
+import { Network } from '@ionic-native/network'
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+
 const firebaseAuth = {
   apiKey: "AIzaSyB51DoNQ_es7SyUkIajEjlXFaklFqVR2Ts",
   authDomain: "travel-gb.firebaseapp.com",
@@ -80,6 +83,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     StatusBar,
     SplashScreen,
     AngularFireAuth,
+
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     HttpClient,
     DataProvider,
@@ -91,7 +95,10 @@ export function HttpLoaderFactory(http: HttpClient) {
      TripService,
      ResturantService,
      ReactiveFormsModule,
-     FormsModule
+     FormsModule,
+     Geolocation,
+     
+      
 
   ]
 })

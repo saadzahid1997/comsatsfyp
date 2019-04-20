@@ -1,6 +1,6 @@
 
 
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 declare var google: any;
 
@@ -9,7 +9,7 @@ declare var google: any;
   selector: 'page-location-map',
   templateUrl: 'location-map.html',
 })
-export class LocationMapPage {
+export class LocationMapPage implements OnInit {
 
   map: any;
   geocoder: any;
@@ -25,7 +25,7 @@ export class LocationMapPage {
   /**
    * Lifecycle hook that is called after a component's view has been fully initialized.
    */
-  ngAfterViewInit() {
+  ngOnInit() {
     this.platform.ready().then(() => {
       this.loadMap();
     });
@@ -53,7 +53,7 @@ export class LocationMapPage {
         const longitude = results[0].geometry.location.lng();
 
         // Set Latitude and Longitude
-        const latlng = new google.maps.LatLng(latitude, longitude);
+        const latlng = new google.maps.LatLng(35.9221343,74.31055279999998 );
 
         // Map Options
         const mapOptions = {

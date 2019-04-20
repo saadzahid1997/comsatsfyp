@@ -7,6 +7,7 @@ import { SearchHotelsPage } from '../../pages/hotel/search-hotels/search-hotels'
 import { Observable, BehaviorSubject } from 'rxjs';
 import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
 import { TripService } from '../../app/services/trips.service';
+import { storage } from 'firebase';
 //import { FirebaseApp } from '@firebase/app-types';
 /**
  * Generated class for the RetrieveHotelPage page.
@@ -26,9 +27,15 @@ export class RetrieveHotelPage implements OnInit {
   hotels: Observable<any>;
   radius = new BehaviorSubject(0.5);
   hotelsList: any = [];
+  retHotelList:any=[];
   hotel = {} as Hotel;
+  i:any;
+  x:any;
+  hotelLat:any;
+  hotelLng:any;
   // tripDetails = [];
   locationRef = SearchHotelsPage.searchPlace;
+  searchLocationRef:string;
   hotelRef$: AngularFirestoreCollection<any>
   constructor(public navCtrl: NavController, public navParams: NavParams, private db: AngularFirestore,
     private hotelSer: HotelService, public popoverCtrl: PopoverController, public tripSer: TripService) {
@@ -40,9 +47,38 @@ export class RetrieveHotelPage implements OnInit {
     // this.tripSer.getTripDetails().subscribe(trips => {
     //   console.log(trips);
     // })
+    console.log("in thre retrieve page")
+    console.log(" Latitude")
+    console.log(this.navParams.data.searchLocationLat);
+    this.hotelLat = this.navParams.data.searchLocationLat;
+    console.log(" Longitude")
+    this.hotelLng = this.navParams.data.searchLocationLng;
     this.hotelSer.getHotels().subscribe(items => {
       console.log(items);
       this.hotelsList = items;
+      console.log(this.hotelsList);
+      console.log(items.length);
+      console.log("Hotel")
+      this.x = 0;
+      for(let i = 0; i< items.length ; i++ )
+      {
+        if(this.hotelsList[i].data.hotelLocationLat == this.hotelLat && this.hotelsList[i].data.hotelLocationLng == this.hotelLng )
+        {
+          console.log("in the for loop")
+
+          this.retHotelList[this.x] = this.hotelsList[i];
+          
+          this.x = this.x + 1;  
+        }
+        
+        else
+        {
+          console.log("not executing")
+        }
+      }
+      console.log(this.retHotelList);
+      this.hotelsList = this.retHotelList;
+      
     }); 
     // //     const center = this.geo.point(40.5,-80.0);
     // //     const radius = 0.5;

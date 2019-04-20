@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ModalController } from 'ionic-angular';
 import { Hotel } from '../../models/hotels/hotels.interface';
-
 //import {google} from '@google/maps';
 import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
-
+import { MapsAPILoader } from '@agm/core';
+//import { google } from '@agm/core/services/google-maps-types';
+declare var google: any;
 @IonicPage()
 @Component({
   selector: 'page-addHotels',
@@ -19,10 +20,14 @@ export default class AddHotelsPage {
   imageFileName: any;
   hotel = {} as Hotel
   hotelRef$: AngularFirestoreCollection<any>
+  ngZone: any;
+  map: any;
+  google:any;  
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public database: AngularFirestore, public alert: AlertController,
-    public modal: ModalController
+    public modal: ModalController, public MapsApiLoader:MapsAPILoader,
+    
   ) {
     console.log("i am here")
     this.hotelRef$ = this.database.collection('hotel');
@@ -146,46 +151,43 @@ export default class AddHotelsPage {
     alertHotelAmenities.present();
   }
 
-
+  hotelLocation()
+  {
+      this.MapsApiLoader.load().then(() => {
+      let nativeHomeInputBox = document.getElementById('txtLocation').getElementsByTagName('input')[0];
+      let autocomplete = new google.maps.places.Autocomplete(nativeHomeInputBox,{
+        types : ["geocode"]
+      });
+      autocomplete.setComponentRestrictions({ 'country': ['pk'] })
+      autocomplete.addListener("place_changed", () => {
+          let place = google.maps.places.PlaceResult = autocomplete.getPlace();
+          console.log(place);
+          this.hotel.hotelLocationLat = place.geometry.location.lat();
+          this.hotel.hotelLocationLng = place.geometry.location.lng();
+          //console.log(this.hotel.hotelLocation);               
+      });
+    });
+  }
    
    roomsModal()
    {
       
        let roomModal = this.modal.create('HotelRoomsPage');
        roomModal.present();
+       
    }
   ionViewDidLoad() {
-    // console.log("I'm here in ioncViewLoad");
-    //console.log(value);
-    //console.log(this.hotel);
-
-    // this.mapsAPILoader.load().then(() => {
-    //   let nativeHomeInputBox = document.getElementById('txtLocation').getElementsByTagName('input')[0];
-    //   let autocomplete = new google.maps.places.Autocomplete(nativeHomeInputBox, {
-    //     types: ["geocode"]
-    //   });
-    //   autocomplete.setComponentRestrictions({ 'country': ['pk'] })
-    //   autocomplete.addListener("place_changed", () => {
-    //     this.ngZone.run(() => {
-
-    //       let place: google.maps.places.PlaceResult = autocomplete.getPlace();
-    //       this.hotel.hotelLocation = place.formatted_address;
-    //       this.hotelLocationRef = place.formatted_address;
-
-
-    //     });
-    //   });
-    // });
+   
   }
   addHotel() {
     this.hotelRef$.add({
       hotelName: this.hotel.hotelName,
       hotelCategory: this.hotel.hotelCategory,
-      
       hotelOverview: this.hotel.hotelOverview,
       hotelMail: this.hotel.hotelMail,
       hotelContactNo: this.hotel.hotelContactNo,
-      hotelLocation: this.hotel.hotelLocation,
+      hotelLocationLat: this.hotel.hotelLocationLat,
+      hotelLocationLng: this.hotel.hotelLocationLng,
       hotelAmenities:this.hotel.hotelAmenities
     });
   }

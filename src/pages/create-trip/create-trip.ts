@@ -40,8 +40,9 @@ export class CreateTripPage implements OnInit {
     this.navCtrl.push("TripsPage");
     console.log("Clicked");
   }
-  tripDetails()
+  tripDetails(tripDetailId)
   {
-    this.navCtrl.setRoot('TripDetailsPage');
+    console.log(tripDetailId);
+    this.navCtrl.setRoot('TripDetailsPage',{tripDetailId});
   }
 }

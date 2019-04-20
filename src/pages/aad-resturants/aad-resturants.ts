@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
 import {Resturant} from '../../models/resturants/resturants.interface';
-
+import { MapsAPILoader } from '@agm/core';
+//import { google } from '@agm/core/services/google-maps-types';
+declare var google: any;
 /**
  * Generated class for the AadResturantsPage page.
  *
@@ -18,7 +20,8 @@ import {Resturant} from '../../models/resturants/resturants.interface';
 export class AadResturantsPage {
   resturnatRef$ : AngularFirestoreCollection<any>;
   resturant = {} as Resturant;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alert : AlertController, public db:AngularFirestore) {
+  google:any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alert : AlertController, public db:AngularFirestore, public MapsApiLoader: MapsAPILoader) {
     this.resturnatRef$ = this.db.collection('resturants');
   }
 
@@ -108,7 +111,22 @@ export class AadResturantsPage {
     });
     alertResturantCuisines.present();    
   }
-  
+  resturantLocation()
+  {
+    this.MapsApiLoader.load().then(() => {
+      let nativeHomeInputBox = document.getElementById('txtLocation').getElementsByTagName('input')[0];
+      let autocomplete = new google.maps.places.Autocomplete(nativeHomeInputBox,{
+        types : ["geocode"]
+      });
+      autocomplete.setComponentRestrictions({ 'country': ['pk'] })
+      autocomplete.addListener("place_changed", () => {
+          let place = google.maps.places.PlaceResult = autocomplete.getPlace();
+          console.log(place);
+          this.resturant.resturantLocation = place.geometry.location;
+          console.log(this.resturant.resturantLocation);               
+      });
+    });
+  }
   addResturant()
   { 
     this.resturnatRef$.add({

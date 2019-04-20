@@ -5,6 +5,9 @@ import { IonicPage, NavController, NavParams, MenuController, AlertController } 
 import { FormBuilder, Validators } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/auth';
 import {AngularFirestore,AngularFirestoreCollection} from '@angular/fire/firestore'
+import { MapsAPILoader } from '@agm/core';
+//import { google } from '@agm/core/services/google-maps-types';
+declare var google: any;
 @IonicPage()
 @Component({
   selector: 'page-sign-up',
@@ -14,25 +17,25 @@ export class SignUpPage {
 
   @ViewChild ('username')user;
   @ViewChild ('userpass')pass;
-  
+  google:any;
   registrationForm: any;
 
   // user  =  {} as User;
   
   emailPattern: string = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
   userRef$: AngularFirestoreCollection<any>
-  
-
   constructor(public navCtrl: NavController,
-    public navParams: NavParams,
-    private formBuilder: FormBuilder,
-    public menuCtrl: MenuController,
-    private fire: AngularFireAuth,
-    public alertCtrl:AlertController,
-    private database:AngularFirestore) {
-    this.menuCtrl.enable(false); // Disable SideMenu
-    this.userRef$ = this.database.collection('users');  
-  }
+              public navParams: NavParams,
+              private formBuilder: FormBuilder,
+              public menuCtrl: MenuController,
+              private fire: AngularFireAuth,
+              public alertCtrl:AlertController,
+              private database:AngularFirestore,
+              public MapsApiLoader:MapsAPILoader) 
+                          {
+                            this.menuCtrl.enable(false); // Disable SideMenu
+                            this.userRef$ = this.database.collection('users');  
+                          }
   
   
   ngOnInit() {
@@ -55,42 +58,31 @@ export class SignUpPage {
     });
   }
 
-  doRegistration() {
-  
+  doRegistration() {  
     this.fire.auth.createUserWithEmailAndPassword(this.user.value, this.pass.value)
       .then(() =>{
-        this.navCtrl.setRoot('HomePage');    
+        this.navCtrl.setRoot('HomePage');   
       })
       .catch(error =>{
         this.alert(error.message);
-      })      
-
-    
-      
-
-  }
-
-  
-  
+      })        
+    }
+       
   userLocation()
     {
-      // this.mapsApiLoader.load().then(() => {
-      //   let nativeHomeInputBox = document.getElementById('userAddress').getElementsByTagName('input')[0];
-      //   let autocomplete = new google.maps.places.Autocomplete(nativeHomeInputBox, {
-      //     types: ["geocode"]
-      //   });
-      //   //aautocomplete.setComponentRestrictions({ 'country': ['pk'] })
-      //   autocomplete.addListener("place_changed", () => {
-      //     this.ngZone.run(() => {
-           
-      //       let place: google.maps.places.PlaceResult = autocomplete.getPlace();
-      //       this.user.userLocation = place.formatted_address;
-      //       //this.hotelLocationRef = place.formatted_address;
-            
-  
-      //     });
-      //   });
-      // });
+      this.MapsApiLoader.load().then(() => {
+        let nativeHomeInputBox = document.getElementById('userAddress').getElementsByTagName('input')[0];
+        let autocomplete = new google.maps.places.Autocomplete(nativeHomeInputBox,{
+          types : ["geocode"]
+        });
+        autocomplete.setComponentRestrictions({ 'country': ['pk'] })
+        autocomplete.addListener("place_changed", () => {
+            let place =  google.maps.places.PlaceResult = autocomplete.getPlace();
+            console.log(place);
+            this.user.userLocation = place.geometry.location;
+            console.log(this.user.userLocation);               
+        });
+      });
     }
     
     addUser()
@@ -104,30 +96,6 @@ export class SignUpPage {
       });
     }
 
-  //   ionViewDidLoad(value) {
-  //     // console.log("I'm here in ioncViewLoad");
-  //      //console.log(value);
-  //      //console.log(this.hotel);
-   
-  //      this.mapsAPILoader.load().then(() => {
-  //        let nativeHomeInputBox = document.getElementById('userAddress').getElementsByTagName('input')[0];
-  //        let autocomplete = new google.maps.places.Autocomplete(nativeHomeInputBox, {
-  //          types: ["geocode"]
-  //        });
-  //        autocomplete.setComponentRestrictions({ 'country': ['pk'] })
-  //        autocomplete.addListener("place_changed", () => {
-  //          this.ngZone.run(() => {
-            
-  //            let place: google.maps.places.PlaceResult = autocomplete.getPlace();
-  // //           this.hotel.hotelLocation = place.formatted_address;
-  //   //         this.hotelLocationRef = place.formatted_address;
-             
-   
-  //          });
-  //        });
-  //      });
-  //    }
-       
   goToLoginPage() {
     this.navCtrl.setRoot('SignInPage');
   }
