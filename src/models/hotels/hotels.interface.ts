@@ -5,10 +5,13 @@ export interface Hotel
   hotelName: string;
   hotelCategory: string;
   hotelPrice: string;
-  hotelOverview: string;
+  hotelDescription: string;
+  hotelReview:string;
   hotelMail:EmailValidator;
   hotelContactNo:number;
   hotelLocationLat:any;
   hotelLocationLng:any;
   hotelAmenities:string;
+  hotelRoomRef:string;
+  hotelLocation:string;
 }

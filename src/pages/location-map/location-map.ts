@@ -15,11 +15,17 @@ export class LocationMapPage implements OnInit {
   geocoder: any;
   address: any;
   google:any;
+  Latitude: any;
+  Longitude: any;
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public platform: Platform) {
     // Get Hotel Address
-    this.address = this.navParams.get('address');
+    this.Latitude = this.navParams.get('Latitude');
+    this.Longitude = this.navParams.get('Longitude');
+    this.address = this.navParams.get('Address');
+    console.log(this.Latitude);
+    console.log(this.Longitude);
   }
 
   /**
@@ -41,19 +47,20 @@ export class LocationMapPage implements OnInit {
     this.geocoder = new google.maps.Geocoder();
 
     // Convert Hotel Address into Geographic Coordinates(Latitude and Longitude)
-    this.geocoder.geocode({
-      'address': this.address
-    }, function (results, status) {
-      if (status == google.maps.GeocoderStatus.OK) {
-
-        // Hotel Latitude
-        const latitude = results[0].geometry.location.lat();
+    // this.geocoder.geocode({
+    //   //'address': this.address
+       
+    // }, function (results, status) 
+      // if (status == google.maps.GeocoderStatus.OK) {
+         console.log("In the function") 
+      //   // Hotel Latitude
+        //const latitude = results[0].geometry.location.lat();
 
         // Hotel Longitude
-        const longitude = results[0].geometry.location.lng();
+        //const longitude = results[0].geometry.location.lng();
 
         // Set Latitude and Longitude
-        const latlng = new google.maps.LatLng(35.9221343,74.31055279999998 );
+        let latlng = new google.maps.LatLng(this.Latitude, this.Longitude );
 
         // Map Options
         const mapOptions = {
@@ -75,13 +82,14 @@ export class LocationMapPage implements OnInit {
 
         // Marker Infor Window
         const infoWindow = new google.maps.InfoWindow({
-          content: results[0].formatted_address
+          content: this.address
         });
 
         google.maps.event.addListener(marker, 'click', function () {
           infoWindow.open(this.map, marker);
         });
-      }
-    });
+      
+    
+    console.log("Done");
   }
 }

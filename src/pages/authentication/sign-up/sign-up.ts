@@ -61,7 +61,7 @@ export class SignUpPage {
   doRegistration() {  
     this.fire.auth.createUserWithEmailAndPassword(this.user.value, this.pass.value)
       .then(() =>{
-        this.navCtrl.setRoot('HomePage');   
+        this.navCtrl.setRoot('SignInPage');   
       })
       .catch(error =>{
         this.alert(error.message);

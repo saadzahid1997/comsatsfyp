@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { IonicApp, IonicErrorHandler, IonicModule, NavController,NavParams } from 'ionic-angular';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -27,6 +27,8 @@ import { TripService } from './services/trips.service';
 import { ResturantService } from './services/resturant.service';
 import { Network } from '@ionic-native/network'
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { Camera} from '@ionic-native/camera/ngx';
+//import { NavParams } from 'ionic-angular/navigation/nav-params';
 
 const firebaseAuth = {
   apiKey: "AIzaSyB51DoNQ_es7SyUkIajEjlXFaklFqVR2Ts",
@@ -83,7 +85,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     StatusBar,
     SplashScreen,
     AngularFireAuth,
-
+    
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     HttpClient,
     DataProvider,
@@ -97,6 +99,10 @@ export function HttpLoaderFactory(http: HttpClient) {
      ReactiveFormsModule,
      FormsModule,
      Geolocation,
+     Camera
+     
+     
+     
      
       
 

@@ -49,12 +49,16 @@ export class SignInPage {
         buttons:['OK']
       }).present();
     }
-  doLogin() {
+  doLogin(userName) {
     this.fire.auth.signInWithEmailAndPassword(this.user.value,this.pass.value)
     .then(() =>{this.navCtrl.setRoot('HomePage');})
     .catch(error =>{this.alert(error.message)})
     console.log(this.user.value);
     console.log(this.pass.value);
+    userName = this.user.value
+    this.navCtrl.push('MyApp',{userName})
+    console.log("In the sign in page");
+    console.log(userName);
   }
 
   goToForgetPasswordPage() {

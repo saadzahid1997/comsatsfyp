@@ -6,17 +6,18 @@
  * File path - '../../src/app/app.component'
  */
 
-import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, MenuController } from 'ionic-angular';
+import { Component, ViewChild, OnInit } from '@angular/core';
+import { Nav, Platform, MenuController, NavParams } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { TranslateService } from '@ngx-translate/core';
 import { DataProvider } from '../providers/data/data';
+import { NavController } from 'ionic-angular/navigation/nav-controller';
 
 @Component({
   templateUrl: 'app.html'
 })
-export class MyApp {
+export class MyApp implements OnInit{
 
   @ViewChild(Nav) nav: Nav;
 
@@ -34,7 +35,8 @@ export class MyApp {
     public splashScreen: SplashScreen,
     public menuCtrl: MenuController,
     public translateService: TranslateService,
-    public dataProvider: DataProvider) {
+    public dataProvider: DataProvider,
+    ) {
     this.initializeApp();
 
     // Set Default Language
@@ -42,6 +44,12 @@ export class MyApp {
 
     // Get List of Side Menu Data
     this.getSideMenuData();
+  }
+
+  ngOnInit()
+  {
+    console.log("In the app component");
+    //console.log(this.navParams.data.userName);
   }
 
   initializeApp() {

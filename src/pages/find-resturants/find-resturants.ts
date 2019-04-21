@@ -23,6 +23,10 @@ export class FindResturantsPage implements OnInit {
   geocoder: any;
   address: any;
   google:any;
+  resLat: any;
+  resLng: any;
+  retResList: any = [];
+  x: number;
 
   constructor(public navCtrl: NavController, 
                public navParams: NavParams,
@@ -38,11 +42,34 @@ export class FindResturantsPage implements OnInit {
     console.log('ionViewDidLoad FindResturantsPage');
   }
   ngOnInit()
-  {
-    //   this.resturantSer.getResturant().subscribe(resturant=>{
-    //   console.log(resturant);
-    //   this.resturantList = resturant;
-    // });
+  {   
+      this.resLat = this.navParams.data.searchResLat;
+      this.resLng = this.navParams.data.searchResLng;
+      this.resturantSer.getResturant().subscribe(resturant=>{
+      console.log(resturant);
+      this.resturantList = resturant;
+      this.x = 0;  
+      //console.log(this.resturantList[2].data.resturantLocationLat);
+      for(let i = 0; i< resturant.length ; i++ )
+      {
+        if(this.resturantList[i].data.resturantLocationLat == this.resLat && this.resturantList[i].data.resturantLocationLng == this.resLng )
+        {
+          console.log("in the for loop")
+
+          this.retResList[this.x] = this.resturantList[i];
+          
+          this.x = this.x + 1;  
+        }
+        
+        else
+        {
+          console.log("not executing")
+        }
+      }
+      //console.log(this.retHotelList);
+      this.resturantList = this.retResList
+
+    });
   }
   openTrips(myEvent, resturantId) {
     console.log(resturantId);
@@ -50,5 +77,9 @@ export class FindResturantsPage implements OnInit {
     popover.present({
       ev: myEvent
     });
+  }
+  resDetail(resId)
+  {
+    this.navCtrl.setRoot('ResturantDetailsPage',{resId});
   }
 }

@@ -20,4 +20,11 @@ export class ResturantService {
             return res.map(data => { return { id: data.payload.doc.id, data: data.payload.doc.data() } })
         }))
     }
+    showResDetails(resDetailId) {
+        return this.afs.collection('resturants').doc(resDetailId).snapshotChanges().pipe(map(data => {
+            return {
+                id: data.payload.id, data: data.payload.data()
+            }
+        }))
+    }
 }

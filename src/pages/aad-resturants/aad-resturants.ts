@@ -122,7 +122,9 @@ export class AadResturantsPage {
       autocomplete.addListener("place_changed", () => {
           let place = google.maps.places.PlaceResult = autocomplete.getPlace();
           console.log(place);
-          this.resturant.resturantLocation = place.geometry.location;
+          this.resturant.resturantLocationLat = place.geometry.location.lat();
+          this.resturant.resturantLocationLng = place.geometry.location.lng();
+          this.resturant.resturantLocation = place.formatted_address;
           console.log(this.resturant.resturantLocation);               
       });
     });
@@ -132,6 +134,8 @@ export class AadResturantsPage {
     this.resturnatRef$.add({
       resturantName : this.resturant.resturantName,
       resturantLocation : this.resturant.resturantLocation,
+      resturantLocationLat: this.resturant.resturantLocationLat,
+      resturantLocationLng: this.resturant.resturantLocationLng,
       resturantCuisines: this.resturant.resturantCuisines,
       resturantMeals : this.resturant.resturantMeals,
       resturantMail : this.resturant.resturantMail,

@@ -2,6 +2,11 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController,NavParams, ModalController } from 'ionic-angular';
 import { Rooms } from '../../models/rooms/rooms.interface';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { map } from 'rxjs/operators/map';
+import { query } from '@angular/core/src/render3/instructions';
+import { AadResturantsPage } from '../aad-resturants/aad-resturants';
+import AddHotelsPage from '../addHotels/addHotels';
+import { ViewController } from 'ionic-angular/navigation/view-controller';
 
 /**
  * Generated class for the HotelRoomsPage page.
@@ -20,8 +25,11 @@ export class HotelRoomsPage {
   isActive: any = [];
   enabled : boolean = false;
   roomsRef : AngularFirestoreCollection<any>;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private db:AngularFirestore) {
+  roomId:any;
+  
+  constructor(public navCtrl: NavController, public navParams: NavParams, private db:AngularFirestore, public viewCtrl:ViewController) {
     this.roomsRef = this.db.collection('room-details');
+    
   }
 
   ionViewDidLoad() {
@@ -37,8 +45,9 @@ export class HotelRoomsPage {
     console.log(this.isActive);
     
   }
-  addRooms()
+  addRooms(rId)
   {
+    
     if (this.isActive[0] == true)
       { 
         this.rooms.luxury = true;
@@ -138,10 +147,12 @@ export class HotelRoomsPage {
     else
       {
         this.rooms.five_bed_Nom = false;
-      }        
+      }
+        this.roomId = this.db.createId();
+        rId = this.roomId;     
         this.roomsRef.add
         ({
-            
+            roomsRef: this.roomId, 
             Luxury : this.rooms.luxury,
             normal : this.rooms.normal,
             one_bed_Nom : this.rooms.one_bed_Nom,
@@ -166,10 +177,15 @@ export class HotelRoomsPage {
             five_bed_Lux_price : this.rooms.five_bed_Lux_price,
             numOfLuxRooms: this.rooms.numOfLuxRooms,
             numOfNomRooms: this.rooms.numOfNomRooms
-          });
-
+          });     
+          
           console.log("done");
-          this.navCtrl.last;
-        }
-  //    
+          
+          console.log(rId);
+          
+          
+
+          
+  } 
+  
 }

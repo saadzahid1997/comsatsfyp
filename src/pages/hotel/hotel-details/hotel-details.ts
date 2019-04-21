@@ -8,8 +8,9 @@
  */
 
 import { Component, OnInit, } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, ModalController, AlertController } from 'ionic-angular';
 import { Hotel } from '../../../models/hotels/hotels.interface';
+import { Review } from '../../../models/reviews/reviews.interface';
 //import { HotelService } from '../../../app/services/hotels.service';
 import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
 import { HotelService } from '../../../app/services/hotels.service';
@@ -27,9 +28,10 @@ export class HotelDetailsPage implements OnInit {
   hotelDetail;
   hotel = {} as Hotel;
   hotelId: string;
+  reviews = {} as Review;
   //locationRef = SearchHotelsPage.searchPlace;
-  hotelRef$: AngularFirestoreCollection<any>
-
+  hotelRef$: any
+  reviewRef$:AngularFirestoreCollection<any>
   // Check In Date
   checkInDate: any;
 
@@ -45,10 +47,13 @@ export class HotelDetailsPage implements OnInit {
     public viewCtrl: ViewController,
     public modalCtrl: ModalController,
     private db: AngularFirestore,
-    public hotelSer: HotelService
+    public hotelSer: HotelService,
+    public alert: AlertController
   ) {
     // Get Hotel Details Information
     this.hotelRef$ = this.db.collection('hotel');
+   
+    this.reviewRef$ = this.db.collection('hotel-Reviews')
     // Current Time For CheckIn (Demo)
     this.checkInDate = new Date();
     // Add 5 days more for Check Out time
@@ -64,6 +69,7 @@ export class HotelDetailsPage implements OnInit {
     const hotelId = this.navParams.data.hotelId;
     this.hotelSer.showHotelDetails(hotelId).subscribe(hotel => {
       this.hotelsList[0] = hotel.data;
+      
       console.log(this.hotelsList );
     })
 
@@ -73,7 +79,8 @@ export class HotelDetailsPage implements OnInit {
    */
   openLocationMap()
     {
-      this.modalCtrl.create('LocationMapPage', { address: this.hotel.hotelLocationLat  }).present();
+      
+      this.modalCtrl.create('LocationMapPage', { Latitude: this.hotelsList[0].hotelLocationLat, Longitude: this.hotelsList[0].hotelLocationLng, Address:this.hotelsList[0].hotelLocation}).present();
     }
 
   goToOrderPage() {
@@ -92,6 +99,29 @@ export class HotelDetailsPage implements OnInit {
   getHotelList() {
     //this.hotels = this.dataProvider.getHotels();
   }
+  addReview()
+  {
+      let alertReview = this.alert.create();
+      alertReview.setTitle(' Reviews');
+      alertReview.addInput({
+        type : 'text',
+        label : 'Add your review'
+      })
+        alertReview.addButton('Cancel');
+        alertReview.addButton({
+            text: 'OK',
+            handler: data => {
 
+              this.hotel.hotelReview = data;
+              this.hotelRef$.add
+            ({
+                  hotelReview : this.hotel.hotelReview
+             })
+            }
+        })
+          alertReview.present();
+          console.log(this.hotel.hotelReview)
+        
+  }
 
 }

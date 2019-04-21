@@ -25,4 +25,5 @@ export interface Rooms
   five_bed_Nom_price : string;
   numOfLuxRooms : string;
   numOfNomRooms : string;
+  room_id_ref:string;
 }

@@ -84,24 +84,9 @@ export class SearchHotelsPage {
 
   nearByHotels()
   {
-    // this.map = new google.maps.Map(document.getElementById('map'), {
-    //   center: { lat: -34.9011, lng: -56.1645 },
-    //   zoom: 15
-    // });
-    // this.geoLocation.getCurrentPosition().then(res =>{
-    //   let pos = {
-    //     lat: res.coords.latitude,
-    //     lng: res.coords.longitude
-    //   };
-    //   let marker = new google.maps.marker({
-    //     position:pos,
-    //     map:this.map,
-    //     title:'Current Location'
-    //   });
-    //   this.markers.push(marker);
-    //   this.map.setCenter(pos);      
-    // })
-    }
+    let nearbyHotels =  this.modalCtrl.create('NearbyHotelsPage');
+    nearbyHotels.present();
+  }
   ionViewDidLoad() {
   
     console.log("hyyyyyyyyyyyy");

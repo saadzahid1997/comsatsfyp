@@ -1,23 +1,20 @@
-<!-- 
-  - @author    ThemesBuckets <themebucketbd@gmail.com>
-  - @copyright Copyright (c) 2018
-  - @license   Fulcrumy
--->
+
 
 <!-- Header  -->
 <ion-header no-border>
   <header-two title="Hotel Details"></header-two>
-</ion-header>
-<!-- Content  -->
-<ion-content fullscreen elestic-header *ngFor = "let hotel of hotelsList" >
-
-  <!-- Hotel Location Map Icon  -->
   <ion-fab top right edge>
     <button ion-fab color="danger" (tap)="openLocationMap()">
       <ion-icon name="ios-pin-outline"></ion-icon>
     </button>
   </ion-fab>
 
+</ion-header>
+<!-- Content  -->
+<ion-content fullscreen elestic-header *ngFor = "let hotel of hotelsList" >
+
+  <!-- Hotel Location Map Icon  -->
+  
   <!-- Image Slider of Hotel  -->
   <ion-slides slidesPerView="0" pager loop="false" effect="slide" autoplay="5000" class="image-slider"
     style="direction:ltr">
@@ -26,12 +23,13 @@
       <div class="slider-contents">
         
         <!-- Name of Hotel  -->
-        <ion-item>
-        <p class="name" > {{hotel.hotelName}} </p>
-
+        
+        <p class="name">{{hotel.hotelName}}</p>
+        
         <!--Reviews and Type of Hotel -->
+        
         <p class="reviews">{{hotel.hotelOverview}}  | {{hotel.hotelCategory}} </p>
-          </ion-item>
+        
         <!-- Hotel Ratings  
         <rating [(ngModel)]="hotelDetails.star" readOnly="false" max="{{hotelDetails.star}}" emptyStarIconName="ios-star-outline"
           halfStarIconName="star-half" starIconName="ios-star" nullable="true">
@@ -46,24 +44,17 @@
   <!-- Details of Hotel  -->
   <section class="details-section">
 
-    <!-- Hotel Price  -->
-    <div class="price-section">
-      <ion-item text-left no-lines class="price">
-        PRICE
-        <span item-end>${{hotel.hotelPrice}}/per nights</span>
-      </ion-item>
-    </div>
-
+    
     <!-- Hotel Overview  -->
     <ion-list no-lines>
       <ion-list-header>
-        <p>Overview</p>
+        <p>Description </p>
       </ion-list-header>
       <ion-item text-wrap>
-        <p>{{hotel.hotelOverview}}</p>
+        <p text-justify [innerHTML]="hotel.hotelDescription"></p>
       </ion-item>
     </ion-list>
-
+    
     <!-- Amenities  
     <ion-list no-lines>
       <ion-list-header>
@@ -97,20 +88,33 @@
     </ion-list>
 
     <!-- Description  -->
+    
     <ion-list no-lines>
       <ion-list-header>
-        <p>Description </p>
+        <p>Amenities </p>
       </ion-list-header>
       <ion-item text-wrap>
-        <p text-justify [innerHTML]="hotel.hotelOverview"></p>
+        <p text-justify [innerHTML]="hotel.hotelAmenities"></p>
       </ion-item>
     </ion-list>
+    
+
+    <ion-list no-lines>
+        <ion-list-header>
+          <p>Reviews </p>
+        </ion-list-header>
+        <ion-item>
+            <ion-label floating >Hotel Review</ion-label>  
+            <ion-input type = "text" (tap) = "addReview()"  [(ngModel)] = "hotel.hotelReview" ></ion-input>    
+        </ion-item>
+        
+      </ion-list>
+      
   </section>
+  <!--<ion-item>               
+      <ion-input type = "text" placeholder = "Add your review"></ion-input>
+  </ion-item>--> 
+
 </ion-content>
 
 <!-- Footer  -->
-<ion-footer>
-  <button ion-button large full no-margin class="custom-btn" (tap)="goToOrderPage()">
-    Book Now
-  </button>
-</ion-footer>
