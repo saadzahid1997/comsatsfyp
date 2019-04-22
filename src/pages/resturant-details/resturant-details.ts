@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { ResturantService } from '../../app/services/resturant.service';
 
 /**
@@ -15,9 +15,10 @@ import { ResturantService } from '../../app/services/resturant.service';
   templateUrl: 'resturant-details.html',
 })
 export class ResturantDetailsPage implements OnInit {
-  resturantList: any;
+  resturantList: any = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public resSer:ResturantService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public resSer:ResturantService,
+  public  modalCtrl:ModalController) {
   }
 
   ngOnInit()
@@ -31,6 +32,11 @@ export class ResturantDetailsPage implements OnInit {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ResturantDetailsPage');
+  }
+  openLocationMap()
+  {
+    
+    this.modalCtrl.create('LocationMapPage', { Latitude: this.resturantList[0].resturantLocationLat, Longitude: this.resturantList[0].resturantLocationLng, Address:this.resturantList[0].resturantLocation}).present();
   }
 
 }

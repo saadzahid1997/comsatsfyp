@@ -15,4 +15,28 @@
 
 <ion-content padding *ngFor = "let trip of tripList">
   <ion-item>{{trip.tripName}}</ion-item>
+  <ion-item >
+    <h1>Hotels</h1>
+    <ion-row>
+    <ion-col col-6 *ngFor = "let hotel of hotelList">  
+    <ion-card>
+      <h3>{{hotel.hotelName}}</h3>
+      
+    </ion-card>
+    </ion-col>  
+    </ion-row>
+  </ion-item>
+
+  <ion-item >
+      <h1>Resturants</h1>
+      <ion-row>
+      <ion-col col-6 *ngFor = "let resturant of resList">  
+      <ion-card>
+       <h3> {{resturant.resturantName}}</h3>
+        
+      </ion-card>
+      </ion-col>  
+      </ion-row>
+  </ion-item>
+  
 </ion-content>

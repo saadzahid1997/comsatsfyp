@@ -28,6 +28,7 @@ export default class AddHotelsPage implements OnInit {
   map: any;
   google:any;  
   roomRef:any;
+  api_loader;
   room = { } as Rooms;
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public database: AngularFirestore, public alert: AlertController,
@@ -38,18 +39,23 @@ export default class AddHotelsPage implements OnInit {
     console.log("i am here")
     this.hotelRef$ = this.database.collection('hotel');
     this.myPhotosRef = firebase.storage().ref('/Hotel Photos/')  
+    this.api_loader = this.MapsApiLoader.load();
+    
     
     //console.log(this.viewCtrl.onDidDismiss());
     
   }
   ngOnInit(){
-    this.MapsApiLoader.load().then(() => {
-      let nativeHomeInputBox = document.getElementById('txtLocation').getElementsByTagName('input')[0];
+    console.log('in the onint');
+    this.api_loader.then(() => {
+      let nativeHomeInputBox =document.getElementById('txtLocation').getElementsByTagName('input')[0] ;
       let autocomplete = new google.maps.places.Autocomplete(nativeHomeInputBox,{
         types : ["geocode"]
       });
+      
       autocomplete.setComponentRestrictions({ 'country': ['pk'] })
       autocomplete.addListener("place_changed", () => {
+        console.log("api loaded");
           let place = google.maps.places.PlaceResult = autocomplete.getPlace();
           console.log(place);
           this.hotel.hotelLocationLat = place.geometry.location.lat();
@@ -58,8 +64,11 @@ export default class AddHotelsPage implements OnInit {
 
           console.log(this.hotel.hotelLocation);               
       });
-    });
+      
+    }); 
   }
+  
+  
   // public options = {
   //   quality: 100,
   //   destinationType: this.camera.DestinationType.FILE_URI,
@@ -179,8 +188,9 @@ export default class AddHotelsPage implements OnInit {
 
   hotelLocation()
   {
+
+    console.log(this.navParams.data.rId); 
      this.ngOnInit(); 
-      
      
   }
    
@@ -190,6 +200,7 @@ export default class AddHotelsPage implements OnInit {
        let roomModal = this.modal.create('HotelRoomsPage');
        roomModal.present();
        
+       console.log(this.roomRef);
    }
   
    

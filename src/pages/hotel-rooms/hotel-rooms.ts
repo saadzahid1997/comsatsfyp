@@ -181,9 +181,9 @@ export class HotelRoomsPage {
           
           console.log("done");
           
+          this.navCtrl.setRoot('AddHotelsPage',{rId});
+          
           console.log(rId);
-          
-          
 
           
   } 

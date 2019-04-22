@@ -24,7 +24,7 @@ export class HotelService {
 
     showHotelDetails(hotelDetailId) {
         return this.afs.collection('hotel').doc(hotelDetailId).snapshotChanges().pipe(map(data => {
-            return {
+            return {    
                 id: data.payload.id, data: data.payload.data()
             }
         }))

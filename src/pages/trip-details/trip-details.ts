@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { TripService } from '../../app/services/trips.service';
+import { HotelService } from '../../app/services/hotels.service';
+import { ResturantService } from '../../app/services/resturant.service';
 
 /**
  * Generated class for the TripDetailsPage page.
@@ -16,7 +18,12 @@ import { TripService } from '../../app/services/trips.service';
 })
 export class TripDetailsPage implements OnInit {
   tripList : any = []
-  constructor(public navCtrl: NavController, public navParams: NavParams, public tripSer : TripService) {
+  hotelList: any = []
+  hotelId: any= []
+  resId: any= [];
+  resList: any =[];
+  
+  constructor(public navCtrl: NavController, public navParams: NavParams, public tripSer : TripService , public hotelSer:HotelService, public resSer:ResturantService) {
   }
   ngOnInit()
   { 
@@ -25,6 +32,41 @@ export class TripDetailsPage implements OnInit {
         console.log(item);
         this.tripList[0] = item.data;
         console.log(this.tripList);
+        var hotelLength = this.tripList[0].hotels.length;
+        console.log(hotelLength);
+       for(let i = 0 ; i < hotelLength; i++)
+        {
+          console.log(this.tripList[0].hotels[i]);
+
+          this.hotelId[i] = this.tripList[0].hotels[i];
+        }   
+        console.log(this.hotelId);
+        for(let x = 0; x < this.hotelId.length;x++)
+        { 
+          this.hotelSer.showHotelDetails(this.hotelId[x]).subscribe(hotel =>{
+            console.log(hotel);
+            this.hotelList[x] = hotel.data;
+          })
+        }
+        console.log(this.hotelList);  
+        
+        var resLength = this.tripList[0].resturants.length;
+        console.log(resLength);
+       for(let i = 0 ; i < resLength; i++)
+        {
+          console.log(this.tripList[0].resturants[i]);
+
+          this.resId[i] = this.tripList[0].resturants[i];
+        }   
+        console.log(this.hotelId);
+        for(let x = 0; x < this.resId.length;x++)
+        { 
+          this.resSer.showResDetails(this.resId[x]).subscribe(resturant =>{
+            //console.log(hotel);
+            this.resList[x] = resturant.data;
+          })
+        }
+
       })
   
   }

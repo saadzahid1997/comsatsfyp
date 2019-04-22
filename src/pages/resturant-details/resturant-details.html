@@ -5,7 +5,7 @@
   Ionic pages and navigation.
 -->
 <ion-header no-border>
-  <header-two title="Hotel Details"></header-two>
+ 
   <ion-fab top right edge>
     <button ion-fab color="danger" (tap)="openLocationMap()">
       <ion-icon name="ios-pin-outline"></ion-icon>
@@ -16,12 +16,7 @@
 <!-- Content  -->
 <ion-content fullscreen elestic-header *ngFor = "let res of resturantList" >
 
-  <!-- Hotel Location Map Icon  -->
   
-  <!-- Image Slider of Hotel  -->
-  <ion-slides slidesPerView="0" pager loop="false" effect="slide" autoplay="5000" class="image-slider"
-    style="direction:ltr">
-    <ion-slide>
 
       <div class="slider-contents">
         
@@ -40,9 +35,6 @@
 
 
       </div>
-
-    </ion-slide>
-  </ion-slides>
 
   <!-- Details of Hotel  -->
   
