@@ -18,6 +18,7 @@ import { storage } from 'firebase';
 import { Observable } from 'rxjs';
 import { hotelReviewService } from '../../../app/services/hotelReview.service';
 import { UserService } from '../../../app/services/user.service';
+import { roomService } from '../../../app/services/rooms.service';
 
 @IonicPage()
 @Component({
@@ -38,13 +39,17 @@ export class HotelDetailsPage implements OnInit {
   reviewRef$:AngularFirestoreCollection<any>
   // Check In Date
   checkInDate: any;
-
+  hotelList:any = [];
   // Check Out Date
   checkOutDate: any;
   x: number;
   reviewDate = Date.now();
   userRef: any;
-  
+  roomList:any=[];
+  roomRef:any;
+  hotelRoomRef:any;
+  finalList:any=[];
+
   //review: any;
 
   // Array List of Hotels
@@ -59,7 +64,9 @@ export class HotelDetailsPage implements OnInit {
     public hotelSer: HotelService,
     public alert: AlertController,
     public reviewSer:hotelReviewService,
-    public userSer: UserService
+    public userSer: UserService,
+    public roomSer:roomService
+  
   ) {
     // Get Hotel Details Information
     
@@ -76,8 +83,40 @@ export class HotelDetailsPage implements OnInit {
   ngOnInit()
    {     
     //this.userRef = this.navParams.get('userRef');
-     
+     this.roomSer.getRoomDetails().subscribe(items=>{
+        this.roomList = items;
+        console.log(this.roomList);
+        this.roomRef = this.roomList[0].data.roomsRef
+        console.log(this.roomRef);
+      })
+        this.hotelSer.getHotels().subscribe(items=>{
+          this.hotelList = items;
+          console.log(this.hotelList);
+          this.hotelRoomRef = this.hotelList[8].data.roomId
+          console.log(this.hotelRoomRef);
+        })
+        // // this.x = 0;
+        
+
+        // // for(let i = 0; i<this.roomList.length; i++)
+        // // {
+        // //   console.log(this.roomList[i].roomRef);
+        // //   console.log(this.hotelList[i].roomId);
+        // //   if(this.roomList[i].data.roomRef == this.hotelList[i].data.roomId)
+        // //   {
+        // //       this.finalList[this.x]= this.roomList[i]
+        // //       this.x = this.x + 1;
+        // //       //console.log(this.finalList)
+        // //   }
+        // //   else
+        // //   {
+        // //     console.log('not executing room details')
+        // //   }
+        // }
     
+    
+     
+
     this.hotelRef$ = this.db.collection('hotel').doc(this.hotelId);
     this.hotelSer.showHotelDetails(this.hotelId).subscribe(hotel => {
       this.hotelsList[0] = hotel.data;

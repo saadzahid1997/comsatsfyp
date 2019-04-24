@@ -8,6 +8,8 @@ import { CameraOptions,Camera} from '@ionic-native/camera/ngx';
 import firebase, { storage } from 'firebase';
 import {Rooms} from '../../models/rooms/rooms.interface'
 import { ViewController } from 'ionic-angular/navigation/view-controller';
+import { HotelRoomsPage } from '../hotel-rooms/hotel-rooms';
+import { roomService } from '../../app/services/rooms.service';
 //import { google } from '@agm/core/services/google-maps-types';
 declare var google: any;
 @IonicPage()
@@ -33,7 +35,7 @@ export default class AddHotelsPage implements OnInit {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public database: AngularFirestore, public alert: AlertController,
     public modal: ModalController, public MapsApiLoader:MapsAPILoader,public camera:Camera,
-    public viewCtrl : ViewController
+    public viewCtrl : ViewController, public roomSer:roomService
     
   ) {
     console.log("i am here")
@@ -217,18 +219,12 @@ export default class AddHotelsPage implements OnInit {
       hotelLocationLng: this.hotel.hotelLocationLng,
       hotelLocation:this.hotel.hotelLocation,
       hotelAmenities:this.hotel.hotelAmenities,
-      //hotelRoomsRef: this.roomRef
+      roomId:this.hotel.roomId = this.roomSer.getRoomData()
+      
     });
   }
 
-  //   }
-  // // public uploadPhoto(): void {
-  //   this.myPhotosRef.child(this.generateUUID()).child('myPhoto.png')
-  //     .putString(this.myPhoto, 'base64', { contentType: 'image/png' })
-  //     .then((savedPicture) => {
-  //       this.myPhotoURL = savedPicture.downloadURL;
-  //     });
-  // }
+ 
   takePhoto() {
     const options : CameraOptions = {
       quality:50,

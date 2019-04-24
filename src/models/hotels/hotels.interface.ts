@@ -14,5 +14,5 @@ export interface Hotel
   hotelAmenities:string;
   hotelRoomRef:string;
   hotelLocation:string;
-  
+  roomId:string;
 }

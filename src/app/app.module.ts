@@ -34,6 +34,7 @@ import { GoogleMapsProvider } from '../providers/google-maps/google-maps';
 import { LocationsProvider } from '../providers/locations/locations';
 import { UserService } from './services/user.service';
 import {HotelDetailsPage} from '../pages/hotel/hotel-details/hotel-details';
+import { roomService } from './services/rooms.service';
 //import { NavParams } from 'ionic-angular/navigation/nav-params';
 
 const firebaseAuth = {
@@ -106,6 +107,7 @@ export function HttpLoaderFactory(http: HttpClient) {
      ResturantService,
      hotelReviewService,
      UserService,
+     roomService,
      ReactiveFormsModule,
      FormsModule,
      Geolocation,

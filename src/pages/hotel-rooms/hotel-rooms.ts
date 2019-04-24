@@ -7,6 +7,7 @@ import { query } from '@angular/core/src/render3/instructions';
 import { AadResturantsPage } from '../aad-resturants/aad-resturants';
 import AddHotelsPage from '../addHotels/addHotels';
 import { ViewController } from 'ionic-angular/navigation/view-controller';
+import { roomService } from '../../app/services/rooms.service';
 
 /**
  * Generated class for the HotelRoomsPage page.
@@ -27,7 +28,7 @@ export class HotelRoomsPage {
   roomsRef : AngularFirestoreCollection<any>;
   roomId:any;
   
-  constructor(public navCtrl: NavController, public navParams: NavParams, private db:AngularFirestore, public viewCtrl:ViewController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private db:AngularFirestore, public viewCtrl:ViewController,public roomSer:roomService) {
     this.roomsRef = this.db.collection('room-details');
     
   }
@@ -180,8 +181,8 @@ export class HotelRoomsPage {
           });     
           
           console.log("done");
-          
-          this.navCtrl.setRoot('AddHotelsPage',{rId});
+          this.roomSer.setRoomData(rId);
+          this.viewCtrl.dismiss();
           
           console.log(rId);
 

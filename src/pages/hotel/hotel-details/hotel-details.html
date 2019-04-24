@@ -120,6 +120,17 @@
       </ion-item>
     </ion-list>
     
+    <ion-list no-lines>
+        <ion-list-header>
+          <h3>Room Details </h3>
+        </ion-list-header>
+        <ion-item text-wrap>
+          <p text-justify [innerHTML]="hotel.hotelAmenities"></p>
+        </ion-item>
+      </ion-list>
+      
+
+
 
     <ion-list no-lines>
         <ion-list-header>
@@ -135,7 +146,7 @@
         <ion-item>
             <ion-label floating >Add your Review</ion-label>  
             <ion-input type = "text"   [(ngModel)] = "reviews.hotelReview" ></ion-input>
-            
+           
         </ion-item>
         <ion-item>
           <button ion-button (tap) = "addReview()">Done</button>   
