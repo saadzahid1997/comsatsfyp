@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, PopoverController,ModalController } from 'ionic-angular';
 import { HotelService } from '../../app/services/hotels.service';
 import { Hotel } from '../../models/hotels/hotels.interface';
 import { SearchHotelsPage } from '../../pages/hotel/search-hotels/search-hotels';
@@ -33,12 +33,15 @@ export class RetrieveHotelPage implements OnInit {
   x:any;
   hotelLat:any;
   hotelLng:any;
+  hotelLatList: any = [];
+  hotelLngList: any = [];
+  length;
   // tripDetails = [];
   locationRef = SearchHotelsPage.searchPlace;
   searchLocationRef:string;
   hotelRef$: AngularFirestoreCollection<any>
   constructor(public navCtrl: NavController, public navParams: NavParams, private db: AngularFirestore,
-    private hotelSer: HotelService, public popoverCtrl: PopoverController, public tripSer: TripService) {
+    private hotelSer: HotelService, public popoverCtrl: PopoverController, public tripSer: TripService, public modalCtrl: ModalController) {
     this.hotelRef$ = this.db.collection('hotel');
 
   }
@@ -59,8 +62,9 @@ export class RetrieveHotelPage implements OnInit {
       console.log(this.hotelsList);
       console.log(items.length);
       console.log("Hotel")
+      this.length = items.length;
       this.x = 0;
-      for(let i = 0; i< items.length ; i++ )
+      for(let i = 0; i< this.length ; i++ )
       {
         if(this.hotelsList[i].data.hotelLocationLat == this.hotelLat && this.hotelsList[i].data.hotelLocationLng == this.hotelLng )
         {
@@ -78,20 +82,28 @@ export class RetrieveHotelPage implements OnInit {
       }
       console.log(this.retHotelList);
       this.hotelsList = this.retHotelList;
-      
+      console.log(this.hotelsList.length);
+       for(let i = 0; i<this.hotelsList.length; i++)
+       {
+         this.hotelLatList = this.hotelsList[i].data.hotelLocationLat;
+         this.hotelLngList = this.hotelsList[i].data.hotelLocationLng;
+       }
+     
+      console.log(this.hotelLatList);
+      console.log(this.hotelLngList);
+
+
+      // for(let x = 0; x < this.length; x++)
+      // {
+        
+      //   this.hotelLatList[x] = this.hotelsList[x].data.hotelLocationLat;
+      //   this.hotelLngList[x] = this.hotelsList[x].data.hotelLocationLng;
+      // }
+      // console.log(this.hotelLatList);
+      // console.log(this.hotelLngList);
     }); 
-    // //     const center = this.geo.point(40.5,-80.0);
-    // //     const radius = 0.5;
-    // //     const field = 'hotelLocation'
-    // //     //this.geo.collection('hotel').within(center,radius,field);
-    // //     this.hotels = this.radius.pipe(
-    // //       switchMap( r => {
-    // //         return this.geo.collection('hotel').within(center, r, field);
-    // //      })
-    // //     );
-    // //   }  
-    // //   update(v){
-    //     this.radius.next(v);
+
+    
   }
   ionViewDidLoad() {
 
@@ -127,6 +139,10 @@ export class RetrieveHotelPage implements OnInit {
   //   });
 
   // }
+  mapView()
+  {
+        this.modalCtrl.create('HotelMapPage', { Latitude: this.hotelLatList, Longitude: this.hotelLngList}).present();
+  }
 
   hotelDetail(hotelId) {
   

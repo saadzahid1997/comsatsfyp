@@ -28,6 +28,11 @@ import { ResturantService } from './services/resturant.service';
 import { Network } from '@ionic-native/network'
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { Camera} from '@ionic-native/camera/ngx';
+import { hotelReviewService } from './services/hotelReview.service';
+import { ConnectivityProvider } from '../providers/connectivity/connectivity';
+import { GoogleMapsProvider } from '../providers/google-maps/google-maps';
+import { LocationsProvider } from '../providers/locations/locations';
+
 //import { NavParams } from 'ionic-angular/navigation/nav-params';
 
 const firebaseAuth = {
@@ -96,10 +101,14 @@ export function HttpLoaderFactory(http: HttpClient) {
      HotelService,
      TripService,
      ResturantService,
+     hotelReviewService,
      ReactiveFormsModule,
      FormsModule,
      Geolocation,
-     Camera
+     Camera,
+    ConnectivityProvider,
+    GoogleMapsProvider,
+    LocationsProvider
      
      
      

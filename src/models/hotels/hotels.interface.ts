@@ -6,7 +6,7 @@ export interface Hotel
   hotelCategory: string;
   hotelPrice: string;
   hotelDescription: string;
-  hotelReview:string;
+  hotelReview:any[];
   hotelMail:EmailValidator;
   hotelContactNo:number;
   hotelLocationLat:any;
@@ -14,4 +14,5 @@ export interface Hotel
   hotelAmenities:string;
   hotelRoomRef:string;
   hotelLocation:string;
+  
 }

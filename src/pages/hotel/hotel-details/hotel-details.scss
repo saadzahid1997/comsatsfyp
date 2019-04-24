@@ -76,6 +76,10 @@ page-hotel-details {
             }
         }
     }
+    .dateFont
+            {
+                font-size: 10px;
+            }
     ion-footer {
         .custom-btn {
             background: linear-gradient(to right bottom, color($colors, color1), color($colors, color2));

@@ -16,6 +16,7 @@ import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/fire
 import { HotelService } from '../../../app/services/hotels.service';
 import { storage } from 'firebase';
 import { Observable } from 'rxjs';
+import { hotelReviewService } from '../../../app/services/hotelReview.service';
 
 @IonicPage()
 @Component({
@@ -29,6 +30,8 @@ export class HotelDetailsPage implements OnInit {
   hotel = {} as Hotel;
   hotelId: string;
   reviews = {} as Review;
+  reviewList:any = [];
+  hotelReviewList:any= [];
   //locationRef = SearchHotelsPage.searchPlace;
   hotelRef$: any
   reviewRef$:AngularFirestoreCollection<any>
@@ -37,6 +40,10 @@ export class HotelDetailsPage implements OnInit {
 
   // Check Out Date
   checkOutDate: any;
+  x: number;
+  reviewDate = Date.now();
+  
+  //review: any;
 
   // Array List of Hotels
   //hotels: any = [];
@@ -48,31 +55,49 @@ export class HotelDetailsPage implements OnInit {
     public modalCtrl: ModalController,
     private db: AngularFirestore,
     public hotelSer: HotelService,
-    public alert: AlertController
+    public alert: AlertController,
+    public reviewSer:hotelReviewService
   ) {
     // Get Hotel Details Information
-    this.hotelRef$ = this.db.collection('hotel');
+    
    
     this.reviewRef$ = this.db.collection('hotel-Reviews')
     // Current Time For CheckIn (Demo)
     this.checkInDate = new Date();
     // Add 5 days more for Check Out time
     this.checkOutDate = new Date().setTime(new Date().getTime() - (24 * 60 * 60 * 1000) * 5);
-
+    this.hotelId = this.navParams.data.hotelId;
     //this.getHotelList();
   }
 
-  ngOnInit() {
-      
-  
+  ngOnInit()
+   {     
     
-    const hotelId = this.navParams.data.hotelId;
-    this.hotelSer.showHotelDetails(hotelId).subscribe(hotel => {
+    this.hotelRef$ = this.db.collection('hotel').doc(this.hotelId);
+    this.hotelSer.showHotelDetails(this.hotelId).subscribe(hotel => {
       this.hotelsList[0] = hotel.data;
-      
-      console.log(this.hotelsList );
+       console.log(this.hotelsList );
     })
 
+    this.reviewSer.getReviewDetails().subscribe(items =>{
+        this.reviewList = items;
+        this.x = 0;
+        for(let i=0 ; i<items.length ; i++)
+        {
+          if(this.reviewList[i].data.hotelId == this.hotelId)
+          {
+              this.hotelReviewList[this.x] = this.reviewList[i];
+              this.x = this.x + 1;
+          }
+          else
+          {
+            console.log("no reviews")
+          }
+      }
+      console.log(this.hotelReviewList);
+      this.reviewList = this.hotelReviewList;
+        
+    });
   }
   /**
    * Open Location Map
@@ -101,27 +126,13 @@ export class HotelDetailsPage implements OnInit {
   }
   addReview()
   {
-      let alertReview = this.alert.create();
-      alertReview.setTitle(' Reviews');
-      alertReview.addInput({
-        type : 'text',
-        label : 'Add your review'
+       
+      
+      this.reviewRef$.add({
+        hotelId: this.reviews.hotelId = this.hotelId ,
+        hotelReview : this.reviews.hotelReview
       })
-        alertReview.addButton('Cancel');
-        alertReview.addButton({
-            text: 'OK',
-            handler: data => {
-
-              this.hotel.hotelReview = data;
-              this.hotelRef$.add
-            ({
-                  hotelReview : this.hotel.hotelReview
-             })
-            }
-        })
-          alertReview.present();
-          console.log(this.hotel.hotelReview)
-        
+         
   }
 
 }
