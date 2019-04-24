@@ -17,6 +17,7 @@ import { HotelService } from '../../../app/services/hotels.service';
 import { storage } from 'firebase';
 import { Observable } from 'rxjs';
 import { hotelReviewService } from '../../../app/services/hotelReview.service';
+import { UserService } from '../../../app/services/user.service';
 
 @IonicPage()
 @Component({
@@ -42,6 +43,7 @@ export class HotelDetailsPage implements OnInit {
   checkOutDate: any;
   x: number;
   reviewDate = Date.now();
+  userRef: any;
   
   //review: any;
 
@@ -56,7 +58,8 @@ export class HotelDetailsPage implements OnInit {
     private db: AngularFirestore,
     public hotelSer: HotelService,
     public alert: AlertController,
-    public reviewSer:hotelReviewService
+    public reviewSer:hotelReviewService,
+    public userSer: UserService
   ) {
     // Get Hotel Details Information
     
@@ -72,6 +75,8 @@ export class HotelDetailsPage implements OnInit {
 
   ngOnInit()
    {     
+    //this.userRef = this.navParams.get('userRef');
+     
     
     this.hotelRef$ = this.db.collection('hotel').doc(this.hotelId);
     this.hotelSer.showHotelDetails(this.hotelId).subscribe(hotel => {
@@ -127,8 +132,10 @@ export class HotelDetailsPage implements OnInit {
   addReview()
   {
        
-      
+      this.userRef = this.userSer.getUserData();
+      console.log(this.userRef);
       this.reviewRef$.add({
+        userName:this.reviews.userName = this.userRef,
         hotelId: this.reviews.hotelId = this.hotelId ,
         hotelReview : this.reviews.hotelReview
       })

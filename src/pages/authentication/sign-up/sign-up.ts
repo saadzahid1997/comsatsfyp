@@ -6,6 +6,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/auth';
 import {AngularFirestore,AngularFirestoreCollection} from '@angular/fire/firestore'
 import { MapsAPILoader } from '@agm/core';
+import {User} from '../../../models/user/users.interface';
 //import { google } from '@agm/core/services/google-maps-types';
 declare var google: any;
 @IonicPage()
@@ -20,7 +21,7 @@ export class SignUpPage {
   google:any;
   registrationForm: any;
 
-  // user  =  {} as User;
+  userModel  =  {} as User;
   
   emailPattern: string = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
   userRef$: AngularFirestoreCollection<any>
@@ -79,8 +80,10 @@ export class SignUpPage {
         autocomplete.addListener("place_changed", () => {
             let place =  google.maps.places.PlaceResult = autocomplete.getPlace();
             console.log(place);
-            this.user.userLocation = place.geometry.location;
-            console.log(this.user.userLocation);               
+            this.userModel.userLocationLat = place.geometry.location.lat();
+            this.userModel.userLocationLng = place.geometry.location.lng();
+            this.userModel.userAddress = place.formatted_address;
+            console.log(this.user.userAddress);               
         });
       });
     }
@@ -88,11 +91,13 @@ export class SignUpPage {
     addUser()
     {
       this.userRef$.add({
-        userFirstName:this.user.userFirstName,
-        userLastName:this.user.userLastName,
-        userMail:this.user.userMail,
-        userPass:this.user.userPass,
-        userAddress:this.user.userLocation
+        userFName:this.userModel.userFName,
+        userLName:this.userModel.userLName,
+        userMail:this.userModel.userMail,
+        userPass:this.userModel.userPass,
+        userAddress:this.userModel.userAddress,
+        userLocationLat:this.userModel.userLocationLat,
+        userLocationLng:this.userModel.userLocationLng
       });
     }
 

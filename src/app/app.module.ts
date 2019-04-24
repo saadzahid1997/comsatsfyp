@@ -32,7 +32,8 @@ import { hotelReviewService } from './services/hotelReview.service';
 import { ConnectivityProvider } from '../providers/connectivity/connectivity';
 import { GoogleMapsProvider } from '../providers/google-maps/google-maps';
 import { LocationsProvider } from '../providers/locations/locations';
-
+import { UserService } from './services/user.service';
+import {HotelDetailsPage} from '../pages/hotel/hotel-details/hotel-details';
 //import { NavParams } from 'ionic-angular/navigation/nav-params';
 
 const firebaseAuth = {
@@ -52,6 +53,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [
     MyApp
+    
   ],
   imports: [
     BrowserModule,
@@ -85,6 +87,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp
+    
   ],
   providers: [
     StatusBar,
@@ -102,6 +105,7 @@ export function HttpLoaderFactory(http: HttpClient) {
      TripService,
      ResturantService,
      hotelReviewService,
+     UserService,
      ReactiveFormsModule,
      FormsModule,
      Geolocation,

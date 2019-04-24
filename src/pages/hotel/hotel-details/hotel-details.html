@@ -1,8 +1,8 @@
 
 
 <!-- Header  -->
-<ion-header no-border>
-  <header-two title="Hotel Details"></header-two>
+<ion-header no-border title="Hotel Details">
+   
   <ion-fab top right edge>
     <button ion-fab color="danger" (tap)="openLocationMap()">
       <ion-icon name="ios-pin-outline"></ion-icon>
@@ -127,6 +127,7 @@
         </ion-list-header>
         <ion-item *ngFor = "let reviews of reviewList">
         <ion-item>
+          <p>{{reviews.data.userName}}</p>
           <p>{{reviews.data.hotelReview}}</p>
           <p right class="dateFont">{{reviewDate | date}}</p>
         </ion-item>

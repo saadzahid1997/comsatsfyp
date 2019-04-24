@@ -1,5 +1,5 @@
 
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 
 @IonicPage()
@@ -7,16 +7,22 @@ import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angul
   selector: 'page-home',
   templateUrl: 'home.html',
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public menuCtrl: MenuController) {
     this.menuCtrl.enable(true);
-  }
 
-  goToSearchPage() {
-    this.navCtrl.setRoot('SearchPage');
+  }
+ngOnInit()
+{
+    console.log(this.navParams.data.userName)
+
+}
+  goToSearchPage(userName) {
+    userName = this.navParams.data.userName
+    this.navCtrl.setRoot('SearchPage',{userName});
   }
 }
 

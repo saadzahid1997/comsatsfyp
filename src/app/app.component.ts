@@ -13,6 +13,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { TranslateService } from '@ngx-translate/core';
 import { DataProvider } from '../providers/data/data';
 import { NavController } from 'ionic-angular/navigation/nav-controller';
+import { UserService } from './services/user.service';
 
 @Component({
   templateUrl: 'app.html'
@@ -20,7 +21,7 @@ import { NavController } from 'ionic-angular/navigation/nav-controller';
 export class MyApp implements OnInit{
 
   @ViewChild(Nav) nav: Nav;
-
+  userRef:any;
   // Root Page of Application
   rootPage: any = 'LandingPage';
 
@@ -36,6 +37,8 @@ export class MyApp implements OnInit{
     public menuCtrl: MenuController,
     public translateService: TranslateService,
     public dataProvider: DataProvider,
+    public userSer:UserService
+    //public navParams:NavParams
     ) {
     this.initializeApp();
 
@@ -48,8 +51,10 @@ export class MyApp implements OnInit{
 
   ngOnInit()
   {
-    console.log("In the app component");
-    //console.log(this.navParams.data.userName);
+    // this.userRef = this.userSer.getUserData();
+    // console.log(this.userRef);
+    // console.log("In the app component");
+   // console.log(this.navParams.data.userName);
   }
 
   initializeApp() {
@@ -66,6 +71,8 @@ export class MyApp implements OnInit{
    * You get `DataProvider` Service at - 'src/providers/data/data';
    */
   getSideMenuData() {
+    this.userRef = this.userSer.getUserData();
+    console.log(this.userRef);
     this.pages = this.dataProvider.getSideMenus();
   }
 
