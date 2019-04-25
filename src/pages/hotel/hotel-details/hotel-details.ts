@@ -191,4 +191,8 @@ export class HotelDetailsPage implements OnInit {
          
   }
 
+<<<<<<< HEAD
 } 
+=======
+}
+>>>>>>> ccc4b047fdcef2fd9819c67642461e983897c7c7

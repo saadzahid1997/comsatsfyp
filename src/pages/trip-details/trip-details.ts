@@ -35,7 +35,6 @@ export class TripDetailsPage implements OnInit {
         console.log(item);
         this.tripList[0] = item.data;
         console.log(this.tripList);
-
         var hotelLength = this.tripList[0].hotels.length;
         console.log(hotelLength);
        for(let i = 0 ; i < hotelLength; i++)

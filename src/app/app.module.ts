@@ -119,12 +119,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     LocationsProvider,
     PlacesService,
     resturantReviewService 
-     
-     
-     
-     
-      
-
   ]
 })
 export class AppModule { }
